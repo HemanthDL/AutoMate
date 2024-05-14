@@ -1,0 +1,2 @@
+# AutoMate
+Service meets Simplicity
