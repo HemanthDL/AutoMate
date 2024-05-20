@@ -14,7 +14,7 @@ body {
 
 #menu {
   background-color: #111827;
-  width: 300px;
+  width: 250px;
   height: 100%;
   position: fixed;
   top: 0;
@@ -75,8 +75,8 @@ body {
 }
 
 #interface {
-  width: calc(100% - 300px);
-  margin-left: 300px;
+  width: calc(100% - 250px);
+  margin-left: 250px;
   position: relative;
 }
 
@@ -87,7 +87,7 @@ body {
   padding: 15px 30px;
   border-bottom: 3px solid #593ef7;
   position: fixed;
-  width: calc(100% - 300px);
+  width: calc(100% - 250px);
   background-color: #fff;
 }
 
@@ -171,12 +171,13 @@ body {
 
 .values .val-box {
   background-color: #fff;
-  width: 280px;
-  padding: 16px 20px;
+  width: 220px;
+  padding: 18px 20px;
   border-radius: 5px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  margin-left: 10px;
 }
 
 .values .val-box i {
