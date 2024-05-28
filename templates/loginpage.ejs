@@ -7,73 +7,70 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
     />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="login.css" />
     <title>Sign Up | Login</title>
   </head>
-
   <body>
     <div class="nav">
-      <div class= "logo">
-      <h2>AUTOMATE</h2>
+      <div class="logo">
+        <h2>AUTOMATE</h2>
       </div>
       <div class="navigation">
-      <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="#">Mechanic</a></li>
-      <li><a href="/con">Customer</a></li>
-      
-      <li><a href="#"><span>About US</span></a></li>
-      </ul>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/mech">Mechanic</a></li>
+          <li><a href="/con">Customer</a></li>
+          <li><a href="#"><span>About Us</span></a></li>
+        </ul>
       </div>
-   </div>
+    </div>
     <div class="container" id="container">
       <div class="form-container sign-up">
-        <form name="signup_con" id="signup_con" method="post" action="/signupcon">
+        <form name="signup_con" id="signup_con" method="post" action=<%=signactionvalue%> onsubmit="validation()">
           <h1>Create Account</h1>
-          <div class="social-icons">
-            <a href="#" class="icon"
-              ><i class="fa-brands fa-google"></i
-            ></a>
-            <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
-          </div>
-          <span>or use your email for registeration</span>
-          <input name="username" type="text" placeholder="UserName" required/>
-          <input name="email" type="email" placeholder="Email" required/>
-          <input name="password" type="password" placeholder="Password" required/>
-          <input name="mob" type="text" placeholder="Mobile Number" required/>
-          <button onclick="validation()">Sign Up</button>
-        </form>
-      </div>
-      <div class="form-container sign-in">
-        <form name="login_con" method="post" action="/loginconsumer">
-          <h1>Sign In</h1>
           <div class="social-icons">
             <a href="#" class="icon"><i class="fa-brands fa-google"></i></a>
             <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
           </div>
-          <span>or use your email password</span>
-          <input name="loginid" type="email" placeholder="Email" required/>
-          <input name="loginpassword" type="password" placeholder="Password" required/>
-          <a href="#">Forget Your Password?</a>
+          <span>or use your email for registration</span>
+          <input name="username" type="text" placeholder="UserName" required />
+          <input name="email" type="email" placeholder="Email" required />
+          <input name="password" type="password" placeholder="Password" required />
+          <input name="mob" type="text" placeholder="Mobile Number" required />
+          <button onclick="validation()">Sign Up</button>
+        </form>
+      </div>
+      <div class="form-container sign-in">
+        <form name="login_con" method="post" action=<%=loginactionvalue%>>
+          <h1>Sign In As <%=asname%></h1>
+          <div class="social-icons">
+            <a href="#" class="icon"><i class="fa-brands fa-google"></i></a>
+            <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+          </div>
+          <span>or use your email and password</span>
+          <input name="loginid" type="email" placeholder="Email" required />
+          <input name="loginpassword" type="password" placeholder="Password" required />
+          <a href="#">Forgot Your Password?</a>
           <button>Sign In</button>
+          <div id="alert">
+            <% if (typeof errorMessage !== 'undefined' && errorMessage) { %>
+              <%= errorMessage %>
+            <% } %>
+          </div>
         </form>
       </div>
       <div class="toggle-container">
         <div class="toggle">
           <div class="toggle-panel toggle-left">
             <div>
-              <h2>
-                Thank you for trusting us.
-              </h2>
+              <h2>Thank you for trusting us.</h2>
               <p>We hope you will be happy with our service.</p>
             </div>
             <button id="login">Sign In</button>
           </div>
           <div class="toggle-panel toggle-right">
             <div>
-              <h2>
-                Hello User!
-              </h2>
+              <h2>Hello User!</h2>
               <p>Don't have an account?</p>
             </div>
             <button class="hidden" id="register">Sign Up</button>

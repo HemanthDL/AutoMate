@@ -1,7 +1,8 @@
-const mongoose = require("mongoose");
-const connection = require("./connection");
+const mon = require('mongoose')
+const conn = require('./connection')
 
-const conschema = new mongoose.Schema({
+
+const mechscheme = new mon.Schema({
     username: {
         type: String,
         required: true
@@ -25,8 +26,9 @@ const conschema = new mongoose.Schema({
             message: props => `${props.value} is not a valid 10-digit mobile number!`
         }
     }
-});
+})
 
-const Consumer = mongoose.model('Consumer', conschema);
 
-module.exports = Consumer;
+const mechanic = mon.model('mechanic',mechscheme)
+
+module.exports = mechanic
