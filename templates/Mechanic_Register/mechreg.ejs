@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Enter Details For Shop Registration through online</h2>
+    <form method="post" action="/mechreg">
+        <table>
+            <tr>
+                <td>
+                    Shop Name : 
+                </td>
+                <td>
+                    <input type="text" name="shopname" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Owner Name:
+                </td>
+                <td>
+                    <input type="text" name="ownername" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Description About Shop:
+                </td>
+                <td>
+                    <textarea name="descaboutshop" rows="5" cols="20" placeholder="Type Here"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Service Available for:
+                </td>
+                <td>
+                    <input type="checkbox" name="bike" value="Bike">Bike
+                    <input type="checkbox" name="car" value="Car">Car
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Address of Shop:
+                </td>
+                <td>
+                    <textarea name="addr" rows="5" cols="20" placeholder="Type Address"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>Timings of the shop:</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <div class="displaydays"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Phone Number:
+                </td>
+                <td>
+                    <input type="text" name="phnum" required>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+        <button name="register">Register</button>
+    </form>
+    <script>
+        let days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+
+        function printdays(day) {
+            let html = 
+                        `<tr>
+                            <td>
+                                ${day}
+                            </td>
+                            <td>
+                                <input type="text" name="${day}f" size="5"> To <input type="text" name="${day}t" size="5"> <input type="radio" name="notavailable" value="notava">Not Available
+                            </td>
+                        </tr>
+                        `;
+            return html;
+        }
+        let finalhtml = "<table>";
+        days.forEach((day)=>{
+            finalhtml += printdays(day);
+        });
+        finalhtml += "</table>"
+
+        document.querySelector(".displaydays").innerHTML = finalhtml;
+    </script>
+</body>
+</html>

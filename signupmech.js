@@ -13,10 +13,7 @@ router.post('/signupmech', async (req, res) => {
     await collection.insertMany([data])
         .then(() => {
             console.log('Content added to database');
-            let signactionvalue = "/signupmech"
-            let loginactionvalue = "/loginmech"
-            let name = "Mechanic"
-            res.render('loginpage', { errorMessage: null,signactionvalue:signactionvalue,loginactionvalue:loginactionvalue,asname:name });
+            res.render('Mechanic_register/mechreg');
         })
         .catch(() => {
             console.log('Invalid username or password');

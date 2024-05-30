@@ -249,6 +249,14 @@
       menuButton.addEventListener("click", function () {
         menu.classList.toggle("active");
       });
+      const valbtn = Array.from(document.querySelectorAll(".val-box"));
+      valbtn.forEach((e)=>{
+        e.addEventListener('click',()=>{
+          const board = document.querySelector(".board")
+          board.style.visibility = "visible"
+        })
+      })
+      
     </script>
   </body>
 </html>

@@ -232,6 +232,7 @@ body {
   overflow: auto;
   background-color: #fff;
   border-radius: 8px;
+  visibility: hidden;
 }
 
 .board img {

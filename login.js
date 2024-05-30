@@ -4,6 +4,7 @@ const path = require('path');
 const signuprouter = require("./signupcon")
 const signupmech = require("./signupmech")
 const loginmech = require("./loginmech")
+const shopadd = require("./shopadd")
 // const collection = require('./models/consumer')
 
 
@@ -39,6 +40,7 @@ app.use(loginrouter)
 app.use(signuprouter)
 app.use(signupmech)
 app.use(loginmech)
+app.use(shopadd)
 
 
 
