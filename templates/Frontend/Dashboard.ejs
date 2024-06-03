@@ -76,168 +76,51 @@
         <table width="100%">
           <thead>
             <tr>
-              <td>Name</td>
-              <td>Title</td>
+              <td>Shop Name</td>
+              <td>Service Available</td>
               <td>Status</td>
-              <td>Role</td>
+              <td>Address</td>
               <td></td>
             </tr>
           </thead>
           <tbody>
+            <% for (let i = 0; i < data.length; i++) {%>
             <tr>
               <td class="people">
                 <img src="" alt="" />
                 <div class="people-description">
-                  <h5>Ram</h5>
-                  <p>ram@gmail.com</p>
+                  <h5><%= data[i]['shopname'] %></h5>
+                  <p><%= data[i]['ownername'] %></p>
                 </div>
               </td>
               <td class="people-des">
-                <h5>Software Engineer</h5>
-                <p>Web Dev</p>
+                <% for (let j = 0; j < data[i]['serviceAvailable'].length; j++) {%>
+                <p><%= data[i]['serviceAvailable'][j] %></p>
+                <% } %>
               </td>
               <td class="active">
-                <p>Active</p>
+                <% if (data[i]['timings'].get(day).from !=""){%>
+                  <p>Active</p>
+                <% }else { %>
+                  <p>Not Active</p>
+                <% } %>
               </td>
               <td class="role">
-                <p>Owner</p>
+                <p>
+                  <% 
+                    let arr = data[i]['address'].split(' ')
+                    let last = arr.slice(-3)
+                    let laststr = last.join(' ')
+                  
+                  %>
+                  <%= laststr %>
+                </p>
               </td>
               <td class="edit">
                 <a href="#">Edit</a>
               </td>
             </tr>
-            <tr>
-              <td class="people">
-                <img src="" alt="" />
-                <div class="people-description">
-                  <h5>Ram</h5>
-                  <p>ram@gmail.com</p>
-                </div>
-              </td>
-              <td class="people-des">
-                <h5>Software Engineer</h5>
-                <p>Web Dev</p>
-              </td>
-              <td class="active">
-                <p>Active</p>
-              </td>
-              <td class="role">
-                <p>Owner</p>
-              </td>
-              <td class="edit">
-                <a href="#">Edit</a>
-              </td>
-            </tr>
-            <tr>
-              <td class="people">
-                <img src="" alt="" />
-                <div class="people-description">
-                  <h5>Ram</h5>
-                  <p>ram@gmail.com</p>
-                </div>
-              </td>
-              <td class="people-des">
-                <h5>Software Engineer</h5>
-                <p>Web Dev</p>
-              </td>
-              <td class="active">
-                <p>Active</p>
-              </td>
-              <td class="role">
-                <p>Owner</p>
-              </td>
-              <td class="edit">
-                <a href="#">Edit</a>
-              </td>
-            </tr>
-            <tr>
-              <td class="people">
-                <img src="" alt="" />
-                <div class="people-description">
-                  <h5>Ram</h5>
-                  <p>ram@gmail.com</p>
-                </div>
-              </td>
-              <td class="people-des">
-                <h5>Software Engineer</h5>
-                <p>Web Dev</p>
-              </td>
-              <td class="active">
-                <p>Active</p>
-              </td>
-              <td class="role">
-                <p>Owner</p>
-              </td>
-              <td class="edit">
-                <a href="#">Edit</a>
-              </td>
-            </tr>
-            <tr>
-              <td class="people">
-                <img src="" alt="" />
-                <div class="people-description">
-                  <h5>Ram</h5>
-                  <p>ram@gmail.com</p>
-                </div>
-              </td>
-              <td class="people-des">
-                <h5>Software Engineer</h5>
-                <p>Web Dev</p>
-              </td>
-              <td class="active">
-                <p>Active</p>
-              </td>
-              <td class="role">
-                <p>Owner</p>
-              </td>
-              <td class="edit">
-                <a href="#">Edit</a>
-              </td>
-            </tr>
-            <tr>
-              <td class="people">
-                <img src="" alt="" />
-                <div class="people-description">
-                  <h5>Ram</h5>
-                  <p>ram@gmail.com</p>
-                </div>
-              </td>
-              <td class="people-des">
-                <h5>Software Engineer</h5>
-                <p>Web Dev</p>
-              </td>
-              <td class="active">
-                <p>Active</p>
-              </td>
-              <td class="role">
-                <p>Owner</p>
-              </td>
-              <td class="edit">
-                <a href="#">Edit</a>
-              </td>
-            </tr>
-            <tr>
-              <td class="people">
-                <img src="" alt="" />
-                <div class="people-description">
-                  <h5>Ram</h5>
-                  <p>ram@gmail.com</p>
-                </div>
-              </td>
-              <td class="people-des">
-                <h5>Software Engineer</h5>
-                <p>Web Dev</p>
-              </td>
-              <td class="active">
-                <p>Active</p>
-              </td>
-              <td class="role">
-                <p>Owner</p>
-              </td>
-              <td class="edit">
-                <a href="#">Edit</a>
-              </td>
-            </tr>
+            <% } %>
           </tbody>
         </table>
       </div>

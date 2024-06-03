@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const collection = require('./models/consumer')
+const shop = require('./models/shop')
 
 
 router.get('/logincon',(req,res)=>{
@@ -23,7 +24,14 @@ router.post('/logincon', async (req, res) => {
 
         if (consumer.password === req.body.loginpassword) {
             console.log('Login successful');
-            res.render('Frontend/Dashboard');
+            const a = await shop.find()
+            let data = Array.from(a)
+            let d = new Date()
+            d = d.getDay()
+            let days = ['Sunday','Monday','Tuesday','Wednesday','Thrusday','Friday','Saturday']
+            let day = days[d]
+            console.log(day);
+            res.render('Frontend/Dashboard',{data:data , day : day})
             // res.send("<script>alert('Login successful'); window.location.href = '/';</script>");
             return;
         } else {
