@@ -31,7 +31,7 @@ router.post('/logincon', async (req, res) => {
             let days = ['Sunday','Monday','Tuesday','Wednesday','Thrusday','Friday','Saturday']
             let day = days[d]
             console.log(day);
-            res.render('Frontend/Dashboard',{data:data , day : day})
+            res.render('Frontend/Dashboard',{data:data , day : day , name : consumer.username})
             // res.send("<script>alert('Login successful'); window.location.href = '/';</script>");
             return;
         } else {

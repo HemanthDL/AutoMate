@@ -1,5 +1,5 @@
 const mon = require('mongoose')
-const conn = require('./connection')
+
 
 
 const mechscheme = new mon.Schema({

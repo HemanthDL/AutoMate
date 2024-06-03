@@ -1,5 +1,5 @@
 const mon = require('mongoose')
-const conn = require('./connection')
+
 
 
 const shopschema = new mon.Schema({

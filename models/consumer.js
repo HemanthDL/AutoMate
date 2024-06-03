@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const connection = require("./connection");
+
 
 const conschema = new mongoose.Schema({
     username: {
