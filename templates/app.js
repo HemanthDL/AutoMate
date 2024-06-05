@@ -20,28 +20,29 @@ function validation() {
         if (!(/^[a-zA-Z\s]+$/.test(name))) {
             alert('Name must conatin only alphabets');
             flag=1;
-            return;
+            return false;
         }
         if (!(email.includes('@')) || !(email.includes('.'))) {
             alert('Enter a valid email id');
             flag=1;
-            return;
+            return false;
         }
         let pass_regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]{8,}$/;
 
         if (!(pass_regex.test(password))) {
             alert('Password Must Contain atleast\n1 special character\n1 upperCase\n1 lowerCase\nlength must be atleast 8');
             flag=1;
-            return;
+            return false;
         }
         if (isNaN(mobile) || mobile.length > 10 || mobile.length < 10) {
             alert('Enter valid Mobile Number')
             flag=1;
-            return;
+            return false;
         }
 
         if(flag==0){
             document.getElementById('signup_con').submit();
+            return true;
         }
 }
 

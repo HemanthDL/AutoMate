@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const collection = require('./models/mechanic')
+const collection = require('../models/mechanic')
 
 
 router.get('/loginmech',(req,res)=>{
@@ -23,7 +23,7 @@ router.post('/loginmech', async (req, res) => {
 
         if (consumer.password === req.body.loginpassword) {
             console.log('Login successful');
-            res.render('Frontend/Dashboard');
+            res.render('Frontend/Dashboard',{data:null , day : null , name : consumer.username,dashboardname : "Mechanic"})
             // res.send("<script>alert('Login successful'); window.location.href = '/';</script>");
             return;
         } else {

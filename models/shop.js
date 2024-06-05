@@ -11,6 +11,11 @@ const shopschema = new mon.Schema({
         type : String,
         required : true
     },
+    email : {
+        type : String,
+        required : true,
+        unique : true
+    },
     desc: {
         type: String
     },

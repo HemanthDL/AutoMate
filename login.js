@@ -1,11 +1,12 @@
 const express = require('express');
-const loginrouter = require('./logincon');
+const loginrouter = require('./routes/logincon');
 const path = require('path');
 const conn = require('./connection')
-const signuprouter = require("./signupcon")
-const signupmech = require("./signupmech")
-const loginmech = require("./loginmech")
-const shopadd = require("./shopadd")
+const signuprouter = require("./routes/signupcon")
+const signupmech = require("./routes/signupmech")
+const loginmech = require("./routes/loginmech")
+const shopadd = require("./routes/shopadd")
+const booking = require('./routes/slotbooking')
 // const collection = require('./models/consumer')
 
 
@@ -42,6 +43,7 @@ app.use(signuprouter)
 app.use(signupmech)
 app.use(loginmech)
 app.use(shopadd)
+app.use(booking)
 
 
 

@@ -1,9 +1,8 @@
 const express = require('express');
 
-const shop = require('./models/shop');
+const shop = require('../models/shop');
 
 const router = express.Router()
-const port = 3000;
 
 router.get('/mechreg',(req,res)=>{
     res.render('Mechanic_register/mechreg')
@@ -14,6 +13,7 @@ router.post('/mechreg', async (req, res) => {
         const newShop = new shop({
             shopname: req.body.shopname,
             ownername: req.body.ownername,
+            email : req.body.email,
             desc: req.body.descaboutshop,
             serviceAvailable: req.body.bike && req.body.car ? ['Bike', 'Car'] : (req.body.bike ? ['Bike'] : (req.body.car ? ['Car'] : [])),
             address: req.body.addr,

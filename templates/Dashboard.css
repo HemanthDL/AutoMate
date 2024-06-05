@@ -232,9 +232,21 @@ body {
 	overflow: auto;
 	background-color: #fff;
 	border-radius: 8px;
+	/* visibility: hidden; */
+}
+#b1{
 	visibility: hidden;
 }
-
+#b2{
+	visibility: hidden;
+	position: absolute;
+	top: 260px;
+}
+#b3{
+	visibility: hidden;
+	position: absolute;
+	top: 260px;
+}
 .board img {
 	width: 45px;
 	height: 45px;

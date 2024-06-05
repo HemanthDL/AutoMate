@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const collection = require('./models/mechanic');
+const collection = require('../models/mechanic');
 
 router.post('/signupmech', async (req, res) => {
-    let data = {
+    const data = {
         username: req.body.username,
         email: req.body.email,
         password: req.body.password,

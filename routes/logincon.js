@@ -1,7 +1,8 @@
 const express = require('express')
 const router = express.Router()
-const collection = require('./models/consumer')
-const shop = require('./models/shop')
+const collection = require('../models/consumer')
+const book = require('../models/bookslot')
+const shop = require('../models/shop')
 
 
 router.get('/logincon',(req,res)=>{
@@ -31,7 +32,28 @@ router.post('/logincon', async (req, res) => {
             let days = ['Sunday','Monday','Tuesday','Wednesday','Thrusday','Friday','Saturday']
             let day = days[d]
             console.log(day);
-            res.render('Frontend/Dashboard',{data:data , day : day , name : consumer.username,dashboardname : "Customer"})
+            console.log(data);
+            let arr = ['Shop List','Pending','Bill'];
+
+            //for board 2
+            const b = await book.find({customeremail:consumer.email,iscompleted : false});
+            let second = Array.from(b);
+
+            const c = await book.find({customeremail:consumer.email,isaccepted : true})
+            let third = Array.from(c);
+            console.log(third);
+
+            res.render('Frontend/Dashboard',{
+                data:data ,
+                day : day , 
+                name : consumer.username,
+                dashboardname : "Customer",
+                phno :consumer.mobile,
+                conmail:consumer.email, 
+                arr:arr,
+                second : second,
+                third : third
+            });
             // res.send("<script>alert('Login successful'); window.location.href = '/';</script>");
             return;
         } else {
