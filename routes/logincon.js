@@ -29,10 +29,10 @@ router.post('/logincon', async (req, res) => {
             let data = Array.from(a)
             let d = new Date()
             d = d.getDay()
-            let days = ['Sunday','Monday','Tuesday','Wednesday','Thrusday','Friday','Saturday']
+            let days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
             let day = days[d]
-            console.log(day);
-            console.log(data);
+            console.log("Today is : ",day);
+            console.log(data[0]['timings'].get(day)['from']);
             let arr = ['Shop List','Pending','Bill'];
 
             //for board 2

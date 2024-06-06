@@ -67,7 +67,7 @@
 					<h2></h2>
 				</div>
 			</div>
-			<div class="val-box">
+			<div id="box2" class="val-box">
 				<i class="fa-solid fa-timer"></i>
 				<div>
 					<span id="box2"><a href="#">
@@ -76,10 +76,10 @@
 					<h2></h2>
 				</div>
 			</div>
-			<div class="val-box">
+			<div id="box3" class="val-box">
 				<i class="fa-light fa-hand"></i>
 				<div>
-					<span id="box3"><a href="#">
+					<span><a href="#">
 							<%= arr[2] %>
 						</a></span>
 					<h2></h2>
@@ -116,14 +116,14 @@
 									<p>
 										<%= data[i]['serviceAvailable'][j] %>
 									</p>
-									<% } %>
+								<% } %>
 							</td>
 							<td class="active">
-								<% if (data[i]['timings'].get(day).from !="" ){%>
+								<% if (data[i]['timings'].get(day).notavailable == false ){%>
 									<p>Active</p>
-									<% }else { %>
-										<p>Not Active</p>
-										<% } %>
+								<% }else { %>
+									<p>Not Active</p>
+								<% } %>
 							</td>
 							<td class="role">
 								<p>
@@ -132,7 +132,7 @@
 								</p>
 							</td>
 							<td class="edit">
-								<button type="button" class="btn btn-primary btn-sm book-slot-btn" data-shopname="<%= data[i]['shopname'] %>" data-ownername="<%= data[i]['ownername'] %>" data-address="<%= laststr %>" data-email = "<%= data[i]['email'] %>" data-customername = "<%= name %>" data-mobile = "<%= phno %>" data-custemail = "<%= conmail %>">Book Slot</button>
+								<button type="button" id="book_slot" class="btn btn-primary btn-sm book-slot-btn" data-shopname="<%= data[i]['shopname'] %>" data-ownername="<%= data[i]['ownername'] %>" data-address="<%= laststr %>" data-email = "<%= data[i]['email'] %>" data-customername = "<%= name %>" data-mobile = "<%= phno %>" data-custemail = "<%= conmail %>">Book Slot</button>
 							</td>
 						</tr>
 						<% } %>
@@ -215,7 +215,7 @@
 						<td class="people">
 							<img src="" alt="" />
 							<div class="people-description">
-								<h5><%= data[i][' shopname'] %>
+								<h5><%= data[i]['shopname'] %>
 				</h5>
 				<p>
 					<%= data[i]['ownername'] %>
@@ -231,9 +231,9 @@
 	</td>
 	<td class="active">
 		<% if (third[i].iscompleted == false) {%>
-			Working
+			<p>Working</p>
 		<% } else { %>
-			Completed
+			<p>Completed</p>
 		<% } %>
 	</td>
 	<td class="role">
@@ -297,8 +297,7 @@
 			});
 
 			
-			let a = Array.from(document.querySelectorAll(".btn"));
-			a = a.slice(4);
+			let a = Array.from(document.querySelectorAll("#book_slot"));
 			console.log(a);
 
 			a.forEach(button => {

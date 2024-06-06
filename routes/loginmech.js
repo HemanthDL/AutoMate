@@ -1,6 +1,25 @@
 const express = require('express')
 const router = express.Router()
 const collection = require('../models/mechanic')
+const book = require('../models/bookslot')
+const bodyparser = require('body-parser')
+
+router.use(bodyparser.json());
+
+router.post('/update-customer',async(req,res)=>{
+    const {customerId} = req.body;
+    const {mechanicId} = req.body;
+
+    try {
+        await book.updateOne({mechanicemail:mechanicId,customeremail:customerId},{$set:{isaccepted:true}});
+        res.status(200).send({ success: true });
+        console.log("Succesfully Updated");
+        
+    } catch (error) {
+        console.log("error in updating");
+    }
+
+})
 
 
 router.get('/loginmech',(req,res)=>{
@@ -23,7 +42,20 @@ router.post('/loginmech', async (req, res) => {
 
         if (consumer.password === req.body.loginpassword) {
             console.log('Login successful');
-            res.render('Frontend/Dashboard',{data:null , day : null , name : consumer.username,dashboardname : "Mechanic"})
+            let arr = ['Requests','Pending','Completed'];
+            console.log(consumer.email);
+            let a = await book.find({mechanicemail:consumer.email,isaccepted:false});
+            let data = Array.from(a);
+            console.log(data);
+
+            res.render('Frontend/mechanic_dashboard',{
+                data:data , 
+                name : consumer.username,
+                dashboardname : "Mechanic",
+                phno :consumer.mobile,
+                conmail:consumer.email, 
+                arr:arr,
+            });
             // res.send("<script>alert('Login successful'); window.location.href = '/';</script>");
             return;
         } else {

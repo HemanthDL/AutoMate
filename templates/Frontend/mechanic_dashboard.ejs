@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Mechanic Dashboard</title>
+	<link rel="stylesheet" href="../Dashboard.css" />
+	<link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/all.css" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+</head>
+
+<body>
+	<section id="menu">
+		<div class="logo">
+			<img src="" alt="Logo" />
+			<h2>AutoMate</h2>
+		</div>
+		<div class="items">
+			<ul>
+				<li><i class="fas fa-home"></i> <a href="/">Home</a></li>
+				<li><i class="fa-regular fa-wrench"></i>
+					<a href="/mech">Mechanic</a>
+				</li>
+				<li>
+					<i class="fa-regular fa-user"></i>
+					<a href="/con">Customer</a>
+				</li>
+				<li><i class="fa-duotone fa-users"></i> <a href="#">About Us</a></li>
+			</ul>
+		</div>
+	</section>
+
+	<section id="interface">
+		<div class="navigation">
+			<div class="n1">
+				<div>
+					<i id="menu-btn" class="fas fa-bars"></i>
+				</div>
+				<div class="search">
+					<i class="fas fa-search"></i>
+					<input type="text" placeholder="Search..." />
+				</div>
+			</div>
+			<div class="profile">
+				<i class="fa-solid fa-bell-ring"></i>
+				<p>
+					<%= name %>
+				</p>
+				<img src="" />
+			</div>
+		</div>
+
+		<h3 class="i-name">
+			<%= dashboardname %> Dashboard
+		</h3>
+
+		<div class="values">
+			<div id="box1" class="val-box">
+				<!-- <i class="fa-solid fa-badge-check" style="color: #63E6BE;"></i> -->
+				<i class="fa-solid fa-clipboard-list-check"></i>
+				<div>
+					<span><a href="#">
+							<%= arr[0] %>
+						</a></span>
+					<h2></h2>
+				</div>
+			</div>
+			<div id="box3" class="val-box">
+				<i class="fa-solid fa-timer"></i>
+				<div>
+					<span id="box2"><a href="#">
+							<%= arr[1] %>
+						</a></span>
+					<h2></h2>
+				</div>
+			</div>
+			<div id="box3" class="val-box">
+				<i class="fa-light fa-hand"></i>
+				<div>
+					<span><a href="#">
+							<%= arr[2] %>
+						</a></span>
+					<h2></h2>
+				</div>
+			</div>
+		</div>
+		<div id="b1" class="board">
+			<table width="100%">
+				<thead>
+					<tr>
+						<td>Customer Name</td>
+						<td>Booking Date</td>
+						<td>Vehicle Type</td>
+						<td>Problem-Description</td>
+						<td></td>
+					</tr>
+				</thead>
+				<tbody>
+					<% for (let i=0; i < data.length; i++){%>
+						<tr>
+							<td class="people">
+								<img src="" alt="" />
+								<div class="people-description">
+									<h5>
+										<%= data[i]['customername'] %>
+									</h5>
+									<p>
+										<%= data[i]['mobile'] %>
+									</p>
+								</div>
+							</td>
+							<td class="people-des">
+								<p>
+									<%= data[i]['bookeddate'] %>
+								</p>
+								<p>
+									<%= data[i]['bookedtime'] %>
+								</p>
+							</td>
+							<td class="active">
+								<% for (let j=0; j < data[i]['vehicletype'].length; j++) {%>
+									<%= data[i]['vehicletype'][j] %>
+										<% } %>
+							</td>
+							<td class="role">
+								<p>
+									view description
+								</p>
+							</td>
+							<td class="edit">
+								<button type="button" id="accept_btn" class="btn btn-primary btn-sm book-slot-btn"
+									data-customeremail="<%= data[i]['customeremail'] %>"
+									data-mechanicemail="<%= data[i]['mechanicemail'] %>">
+									Accept
+								</button>
+
+							</td>
+						</tr>
+						<% } %>
+				</tbody>
+			</table>
+		</div>
+		
+	</section>
+	<script>
+		const menuButton = document.getElementById("menu-btn");
+		const menu = document.getElementById("menu");
+
+		menuButton.addEventListener("click", function () {
+			menu.classList.toggle("active");
+		});
+
+		let btn1 = document.getElementById('box1');
+		let btn2 = document.getElementById('box2');
+		let btn3 = document.getElementById('box3');
+		btn1.addEventListener('click', (event) => {
+
+			let div1 = document.getElementById('b1');
+			let div2 = document.getElementById('b2');
+			let div3 = document.getElementById('b3');
+			div1.style.visibility = "visible";
+			div2.style.visibility = "hidden";
+			div3.style.visibility = "hidden";
+		});
+		btn2.addEventListener('click', (event) => {
+
+			let div1 = document.getElementById('b1');
+			let div2 = document.getElementById('b2');
+			let div3 = document.getElementById('b3');
+			div1.style.visibility = "hidden";
+			div2.style.visibility = "visible";
+			div3.style.visibility = "hidden";
+		});
+		btn3.addEventListener('click', (event) => {
+
+			let div1 = document.getElementById('b1');
+			let div2 = document.getElementById('b2');
+			let div3 = document.getElementById('b3');
+			div1.style.visibility = "hidden";
+			div2.style.visibility = "hidden";
+			div3.style.visibility = "visible";
+		});
+
+		let acceptbtn = document.querySelectorAll("#accept_btn");
+
+		acceptbtn.forEach(button => {
+			button.addEventListener('click', async (event) => {
+				const customerId = event.target.getAttribute('data-customeremail');
+				const mechanicId = event.target.getAttribute('data-mechanicemail');
+
+				try {
+					const response = await fetch('/update-customer', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+						body: JSON.stringify({ customerId, mechanicId }),
+					});
+
+					const result = await response.json();
+
+					if (result.success) {
+						window.location.reload();
+						// event.target.innerText = 'Accepted';
+						// event.target.disabled = true;
+					} else {
+						alert('Failed to update customer status');
+					}
+				} catch (error) {
+					console.error('Error updating customer status:', error);
+					alert('Failed to update customer status');
+				}
+			});
+		});
+
+	</script>
+</body>
+
+</html>
