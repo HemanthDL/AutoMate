@@ -3,8 +3,11 @@ const router = express.Router()
 const collection = require('../models/mechanic')
 const book = require('../models/bookslot')
 const bodyparser = require('body-parser')
+const view_desc = require('./view_desc')
 
 router.use(bodyparser.json());
+
+
 
 router.post('/update-customer',async(req,res)=>{
     const {customerId} = req.body;
@@ -19,6 +22,19 @@ router.post('/update-customer',async(req,res)=>{
         console.log("error in updating");
     }
 
+});
+
+router.post('/iscomplete-customer',async(req,res)=>{
+    const {customerId} = req.body;
+    const {mechanicId} = req.body;
+
+    try{
+        await book.updateOne({mechanicemail:mechanicId,customeremail:customerId},{$set:{iscompleted:true}});
+        res.status(200).send({success:true});
+        console.log("Updated");
+    } catch(errro){
+        console.log("error in updating");
+    }
 })
 
 
@@ -48,8 +64,16 @@ router.post('/loginmech', async (req, res) => {
             let data = Array.from(a);
             console.log(data);
 
+            let b = await book.find({mechanicemail:consumer.email,iscompleted:false});
+            let second = Array.from(b);
+
+            let c = await book.find({mechanicemail:consumer.email,iscompleted:true});
+            let third = Array.from(c);
+
             res.render('Frontend/mechanic_dashboard',{
                 data:data , 
+                second:second,
+                third:third,
                 name : consumer.username,
                 dashboardname : "Mechanic",
                 phno :consumer.mobile,

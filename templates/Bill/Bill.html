@@ -1,153 +1,165 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<title>Invoice Input Form</title>
-		<link rel="stylesheet" type="text/css" href="styles.css" />
-	</head>
-	<body>
-		<h1>Invoice Input Form</h1>
-		<form action="generate_invoice.html" method="post">
-			<fieldset>
-				<legend>Invoice To</legend>
-				<label for="recipientName">Recipient Name:</label>
-				<input
-					type="text"
-					id="recipientName"
-					name="recipientName"
-					required
-				/><br /><br />
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invoice Input Form</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f4f4f4;
+    }
 
-				<label for="recipientRole">Recipient Role:</label>
-				<input
-					type="text"
-					id="recipientRole"
-					name="recipientRole"
-					required
-				/><br /><br />
+    h1 {
+        text-align: center;
+    }
 
-				<label for="recipientAddress">Recipient Address:</label>
-				<input
-					type="text"
-					id="recipientAddress"
-					name="recipientAddress"
-					required
-				/><br /><br />
+    form {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
 
-				<label for="recipientCountry">Recipient Country:</label>
-				<input
-					type="text"
-					id="recipientCountry"
-					name="recipientCountry"
-					required
-				/><br /><br />
-			</fieldset>
+    fieldset {
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        padding: 20px;
+        border-radius: 8px;
+    }
 
-			<fieldset>
-				<legend>Invoice Details</legend>
-				<label for="invoiceNumber">Invoice Number:</label>
-				<input
-					type="text"
-					id="invoiceNumber"
-					name="invoiceNumber"
-					required
-				/><br /><br />
+    label {
+        display: block;
+        margin-bottom: 8px;
+    }
 
-				<label for="invoiceDate">Invoice Date:</label>
-				<input
-					type="date"
-					id="invoiceDate"
-					name="invoiceDate"
-					required
-				/><br /><br />
-			</fieldset>
+    input[type="text"],
+    input[type="number"],
+    input[type="email"],
+    textarea,
+    input[type="date"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+    }
 
-			<fieldset>
-				<legend>Items</legend>
-				<div id="itemContainer">
-					<div class="item">
-						<label for="description1">Description:</label>
-						<input
-							type="text"
-							id="description1"
-							name="description[]"
-							required
-						/><br /><br />
+    input[type="submit"],
+    button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
 
-						<label for="qty1">Quantity:</label>
-						<input
-							type="number"
-							id="qty1"
-							name="quantity[]"
-							required
-						/><br /><br />
+    input[type="submit"]:hover,
+    button:hover {
+        background-color: #0056b3;
+    }
 
-						<label for="price1">Price:</label>
-						<input
-							type="number"
-							id="price1"
-							name="price[]"
-							required
-						/><br /><br />
-					</div>
-				</div>
-				<button type="button" onclick="addItem()">Add Item</button>
-			</fieldset>
+    .item {
+        margin-bottom: 10px;
+    }
 
-			<fieldset>
-				<legend>Payment Details</legend>
-				<label for="paypalEmail">Paypal Email:</label>
-				<input
-					type="email"
-					id="paypalEmail"
-					name="paypalEmail"
-					required
-				/><br /><br />
+    @media screen and (max-width: 768px) {
+        form {
+            padding: 10px;
+        }
+    }
+</style>
+</head>
+<body>
+<h1>Invoice Input Form</h1>
+<form action="generate_invoice.html" method="post">
+    <fieldset>
+        <legend>Invoice To</legend>
+        <label for="recipientName">Recipient Name:</label>
+        <input type="text" id="recipientName" name="recipientName" required><br>
 
-				<label for="cardPayment">Card Payment Options:</label>
-				<input
-					type="text"
-					id="cardPayment"
-					name="cardPayment"
-					required
-				/><br /><br />
+        <label for="recipientRole">Recipient Role:</label>
+        <input type="text" id="recipientRole" name="recipientRole" required><br>
 
-				<label for="totalDue">Total Due:</label>
-				<input
-					type="number"
-					id="totalDue"
-					name="totalDue"
-					required
-				/><br /><br />
-			</fieldset>
+        <label for="recipientAddress">Recipient Address:</label>
+        <input type="text" id="recipientAddress" name="recipientAddress" required><br>
 
-			<fieldset>
-				<legend>Terms and Conditions</legend>
-				<textarea id="terms" name="terms" rows="4" cols="50" required>
-Lorem ipsum dolor sit amet consectetur, adipisicing elit. Saepe nemo eligendi inventore? Provident iste cumque quam eaque consequatur architecto, consequuntur molestiae? Corporis, voluptates? Fugit, omnis.</textarea
-				><br /><br />
-			</fieldset>
+        <label for="recipientCountry">Recipient Country:</label>
+        <input type="text" id="recipientCountry" name="recipientCountry" required><br>
+    </fieldset>
 
-			<input type="submit" value="Generate Invoice" />
-		</form>
+    <fieldset>
+        <legend>Invoice Details</legend>
+        <label for="invoiceNumber">Invoice Number:</label>
+        <input type="text" id="invoiceNumber" name="invoiceNumber" required><br>
 
-		<script>
-			function addItem() {
-				const container = document.getElementById("itemContainer");
-				const itemCount = container.getElementsByClassName("item").length + 1;
-				const newItem = document.createElement("div");
-				newItem.className = "item";
-				newItem.innerHTML = `
-                <label for="description${itemCount}">Description:</label>
-                <input type="text" id="description${itemCount}" name="description[]" required><br><br>
+        <label for="invoiceDate">Invoice Date:</label>
+        <input type="date" id="invoiceDate" name="invoiceDate" required><br>
+    </fieldset>
 
-                <label for="qty${itemCount}">Quantity:</label>
-                <input type="number" id="qty${itemCount}" name="quantity[]" required><br><br>
+    <fieldset>
+        <legend>Items</legend>
+        <div id="itemContainer">
+            <div class="item">
+                <label for="description1">Description:</label>
+                <input type="text" id="description1" name="description[]" required><br>
 
-                <label for="price${itemCount}">Price:</label>
-                <input type="number" id="price${itemCount}" name="price[]" required><br><br>
-            `;
-				container.appendChild(newItem);
-			}
-		</script>
-	</body>
+                <label for="qty1">Quantity:</label>
+                <input type="number" id="qty1" name="quantity[]" required><br>
+
+                <label for="price1">Price:</label>
+                <input type="number" id="price1" name="price[]" required><br>
+            </div>
+        </div>
+        <button type="button" onclick="addItem()">Add Item</button>
+    </fieldset>
+
+    <fieldset>
+        <legend>Payment Details</legend>
+        <label for="paypalEmail">Paypal Email:</label>
+        <input type="email" id="paypalEmail" name="paypalEmail" required><br>
+
+        <label for="cardPayment">Card Payment Options:</label>
+        <input type="text" id="cardPayment" name="cardPayment" required><br>
+
+        <label for="totalDue">Total Due:</label>
+        <input type="number" id="totalDue" name="totalDue" required><br>
+    </fieldset>
+
+    <fieldset>
+        <legend>Terms and Conditions</legend>
+        <textarea id="terms" name="terms" rows="4" cols="50" required>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Saepe nemo eligendi inventore? Provident iste cumque quam eaque consequatur architecto, consequuntur molestiae? Corporis, voluptates? Fugit, omnis.
+        </textarea>
+    </fieldset>
+
+    <input type="submit" value="Generate Invoice">
+</form>
+
+<script>
+    function addItem() {
+        const container = document.getElementById("itemContainer");
+        const itemCount = container.getElementsByClassName("item").length + 1;
+        const newItem = document.createElement("div");
+        newItem.className = "item";
+        newItem.innerHTML = `
+            <label for="description${itemCount}">Description:</label>
+            <input type="text" id="description${itemCount}" name="description[]" required><br>
+
+            <label for="qty${itemCount}">Quantity:</label>
+            <input type="number" id="qty${itemCount}" name="quantity[]" required><br>
+
+            <label for="price${itemCount}">Price:</label>
+            <input type="number" id="price${itemCount}" name="price[]" required><br>
+        `;
+        container.appendChild(newItem);
+    }
+</script>
+</body>
 </html>

@@ -9,6 +9,26 @@
 	<link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/all.css" />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
 		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+	<style>
+		body {
+			position: relative;
+		}
+
+		#display_desc {
+			padding: 5px;
+			visibility: hidden;
+			width: 25rem;
+			height: 25rem;
+			overflow: scroll;
+			box-shadow: 1px 1px 1px 1px white;
+			transform: scale(1.2);
+			position: absolute;
+			background-color: white;
+			color: black;
+			top: 150px;
+			left: 550px;
+		}
+	</style>
 </head>
 
 <body>
@@ -67,7 +87,7 @@
 					<h2></h2>
 				</div>
 			</div>
-			<div id="box3" class="val-box">
+			<div id="box2" class="val-box">
 				<i class="fa-solid fa-timer"></i>
 				<div>
 					<span id="box2"><a href="#">
@@ -125,9 +145,12 @@
 										<% } %>
 							</td>
 							<td class="role">
-								<p>
-									view description
+								<p id="view_desc">
+									<a href="#">View Description</a>
 								</p>
+								<div id="display_desc">
+									<%= data[i]['complaint'] %>
+								</div>
 							</td>
 							<td class="edit">
 								<button type="button" id="accept_btn" class="btn btn-primary btn-sm book-slot-btn"
@@ -142,8 +165,122 @@
 				</tbody>
 			</table>
 		</div>
-		
+		<div id="b2" class="board">
+			<table width="100%">
+				<thead>
+					<tr>
+						<td>Customer Name</td>
+						<td>Booking Date</td>
+						<td>Vehicle Type</td>
+						<td>Problem-Description</td>
+						<td></td>
+					</tr>
+				</thead>
+				<tbody>
+					<% for (let i=0; i < second.length; i++){%>
+						<tr>
+							<td class="people">
+								<img src="" alt="" />
+								<div class="people-description">
+									<h5>
+										<%= second[i]['customername'] %>
+									</h5>
+									<p>
+										<%= second[i]['mobile'] %>
+									</p>
+								</div>
+							</td>
+							<td class="people-des">
+								<p>
+									<%= second[i]['bookeddate'] %>
+								</p>
+								<p>
+									<%= second[i]['bookedtime'] %>
+								</p>
+							</td>
+							<td class="active">
+								<% for (let j=0; j < second[i]['vehicletype'].length; j++) {%>
+									<%= second[i]['vehicletype'][j] %>
+										<% } %>
+							</td>
+							<td class="role">
+								<p id="view_desc">
+									<a href="#">View Description</a>
+								</p>
+							</td>
+							<td class="edit">
+								<button type="button" id="complete_btn" class="btn btn-primary btn-sm book-slot-btn"
+									data-customeremail="<%= second[i]['customeremail'] %>"
+									data-mechanicemail="<%= second[i]['mechanicemail'] %>">
+									Completed
+								</button>
+							</td>
+						</tr>
+						
+				</tbody>
+			</table>
+		</div>
+		<div id="display_desc">
+			Customer Details<br>Complaint<br>
+			<%= second[i]['complaint'] %>
+		</div><% } %>
+		<div id="b3" class="board">
+			<table width="100%">
+				<thead>
+					<tr>
+						<td>Customer Name</td>
+						<td>Booking Date</td>
+						<td>Vehicle Type</td>
+						<td>Status</td>
+						<td></td>
+					</tr>
+				</thead>
+				<tbody>
+					<% for (let i=0; i < third.length; i++){%>
+						<tr>
+							<td class="people">
+								<img src="" alt="" />
+								<div class="people-description">
+									<h5>
+										<%= third[i]['customername'] %>
+									</h5>
+									<p>
+										<%= third[i]['mobile'] %>
+									</p>
+								</div>
+							</td>
+							<td class="people-des">
+								<p>
+									<%= third[i]['bookeddate'] %>
+								</p>
+								<p>
+									<%= third[i]['bookedtime'] %>
+								</p>
+							</td>
+							<td class="active">
+								<% for (let j=0; j < third[i]['vehicletype'].length; j++) {%>
+									<%= third[i]['vehicletype'][j] %>
+										<% } %>
+							</td>
+							<td class="role">
+								<p>
+									Completed
+								</p>
+							</td>
+							<td class="edit">
+								<button type="button" id="complete_btn" class="btn btn-primary btn-sm book-slot-btn"
+									data-customeremail="<%= third[i]['customeremail'] %>"
+									data-mechanicemail="<%= third[i]['mechanicemail'] %>">
+									Generate Bill
+								</button>
+							</td>
+						</tr>
+						<% } %>
+				</tbody>
+			</table>
+		</div>
 	</section>
+
 	<script>
 		const menuButton = document.getElementById("menu-btn");
 		const menu = document.getElementById("menu");
@@ -214,6 +351,47 @@
 				}
 			});
 		});
+
+		let completebtn = document.querySelectorAll("#complete_btn");
+
+		completebtn.forEach(button => {
+			button.addEventListener('click', async (event) => {
+				const customerId = event.target.getAttribute('data-customeremail');
+				const mechanicId = event.target.getAttribute('data-mechanicemail');
+
+				try {
+					const response = await fetch('/iscomplete-customer', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+						body: JSON.stringify({ customerId, mechanicId }),
+					});
+
+					const result = await response.json();
+
+					if (result.success) {
+						window.location.reload();
+						// event.target.innerText = 'Accepted';
+						// event.target.disabled = true;
+					} else {
+						alert('Failed to update customer status');
+					}
+				} catch (error) {
+					console.error('Error updating customer status:', error);
+					alert('Failed to update customer status');
+				}
+			});
+		});
+
+		let p = document.querySelectorAll('#view_desc');
+		p.forEach(button => {
+			button.addEventListener('click', (e) => {
+				let div = document.getElementById('display_desc');
+				div.style.visibility = "visible";
+			})
+		});
+
 
 	</script>
 </body>
