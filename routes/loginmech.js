@@ -64,7 +64,7 @@ router.post('/loginmech', async (req, res) => {
             let data = Array.from(a);
             console.log(data);
 
-            let b = await book.find({mechanicemail:consumer.email,iscompleted:false});
+            let b = await book.find({mechanicemail:consumer.email,iscompleted:false,isaccepted:true});
             let second = Array.from(b);
 
             let c = await book.find({mechanicemail:consumer.email,iscompleted:true});

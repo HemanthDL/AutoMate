@@ -90,7 +90,7 @@
 			<div id="box2" class="val-box">
 				<i class="fa-solid fa-timer"></i>
 				<div>
-					<span id="box2"><a href="#">
+					<span><a href="#">
 							<%= arr[1] %>
 						</a></span>
 					<h2></h2>
@@ -161,10 +161,14 @@
 
 							</td>
 						</tr>
-						<% } %>
 				</tbody>
+				<div id="display_desc">
+					Customer Details<br>Complaint<br>
+					<%= data[i]['complaint'] %>
+				</div><% } %>
 			</table>
 		</div>
+		
 		<div id="b2" class="board">
 			<table width="100%">
 				<thead>
@@ -215,15 +219,12 @@
 									Completed
 								</button>
 							</td>
-						</tr>
-						
+						</tr>	
 				</tbody>
+				<% } %>
 			</table>
 		</div>
-		<div id="display_desc">
-			Customer Details<br>Complaint<br>
-			<%= second[i]['complaint'] %>
-		</div><% } %>
+		
 		<div id="b3" class="board">
 			<table width="100%">
 				<thead>
