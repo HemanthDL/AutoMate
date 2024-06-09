@@ -160,10 +160,14 @@
 								</p>
 							</td>
 							<td class="edit">
+								<% if (data[i]['timings'].get(day).notavailable==false ){%>
 								<button type="button" id="book_slot" class="btn btn-primary btn-sm book-slot-btn" data-shopname="<%= data[i]['shopname'] %>" data-ownername="<%= data[i]['ownername'] %>" data-address="<%=laststr %>" 
 								data-email = "<%= data[i]['email'] %>" data-customername = "<%=name %>" 
 								data-mobile = "<%= phno %>" 
 								data-custemail = "<%= conmail%>">Book Slot</button>
+								<% }else { %>
+									<button type="button" class="btn btn-primary btn-sm book-slot-btn" style="border-radius: 10px;" disabled>Book Slot</button>
+								<% } %>
 							</td>
 						</tr>
 						<% } %>
