@@ -3,6 +3,48 @@ const router = express.Router()
 const collection = require('../models/consumer')
 const book = require('../models/bookslot')
 const shop = require('../models/shop')
+const bill = require('../models/bill')
+const bodyParser = require('body-parser');
+
+
+router.use(bodyParser.json());
+
+
+router.post('/view-generatedbill', async (req,res)=>{
+    const {customername} = req.body;
+    const {bookeddate} = req.body;
+    const {registernumber} = req.body;
+    const {shopname} = req.body;
+    console.log(customername+" "+bookeddate+" "+registernumber+" "+shopname);
+
+    try {
+        const a = await bill.findOne({customername:customername,bookeddate:bookeddate,registernumber:registernumber});
+        console.log(a);
+        if (!a) {
+            return res.status(404).json({ success: false, message: 'Bill not found' });
+        }
+       
+        res.json({ success: true, billData:a });
+    } catch (error) {
+        console.error('Error fetching bill:', error);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
+})
+
+router.get('/invoice', async (req, res) => {
+    const billData = req.query;
+
+    try {
+        // Render the invoice page with the bill data
+        res.render('Invoice/Invoice', {
+            data: billData,
+            shopname: billData.shopname // Adjust as needed
+        });
+    } catch (error) {
+        console.error('Error rendering invoice:', error);
+        res.status(500).send('Server error');
+    }
+});
 
 
 router.get('/logincon',(req,res)=>{

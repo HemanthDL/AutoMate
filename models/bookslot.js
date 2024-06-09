@@ -42,7 +42,8 @@ const slotschema = new mon.Schema({
     }],
     registernumber : {
         type : String,
-        required : true
+        required : true,
+        unique : true
     },
     complaint : {
         type : String,
@@ -67,7 +68,7 @@ const slotschema = new mon.Schema({
 });
 
 
-slotschema.index({ customeremail: 1, mechanicemail: 1 }, { unique: true });
+// slotschema.index({ customeremail: 1, mechanicemail: 1 }, { unique: true });
 
 const book = mon.model('bookslot', slotschema);
 

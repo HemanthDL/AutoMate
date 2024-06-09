@@ -10,7 +10,7 @@
 				<div class="invoice_info">
 					<div class="i_row">
 						<div class="i_logo">
-							<h1>AutoMate</h1>
+							<h1><%= shopname %></h1>
 						</div>
 						<div class="title">
 							<h1>INVOICE</h1>
@@ -22,12 +22,12 @@
 								<p>Invoice To</p>
 							</div>
 							<div class="p_title">
-								<p>Alex Green</p>
-								<span>Team Lead</span>
+								<p><%= data['customername'] %></p>
+								<span><%= data['customernumber'] %></span>
 							</div>
 							<div class="p_title">
-								<p>10 Woods Cross</p>
-								<p>Texas, USA</p>
+								<p>Vehicle Type</p>
+								<p><%= data['vehicletype'] %></p>
 							</div>
 						</div>
 						<div class="i_details text_right">
@@ -35,18 +35,21 @@
 								<p>Invoice details</p>
 							</div>
 							<div class="p_title">
-								<p>Invoice No:</p>
-								<span>3452356</span>
+								<p>Vehicle Register Number</p>
+								<span><%= data['registernumber'] %></span>
 							</div>
 							<div class="p_title">
-								<p>Invoice Date:</p>
-								<span class="date"></span>
+								<p>Booked Date:</p>
+								<span class="date"><%= data['bookeddate'] %></span>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="invoice_table">
-					<div class="i_table">
+					<h2>Bill Details</h2>
+					<br>
+					<p class="p_title"><%= data['itemdesc'] %></p>
+					<!-- <div class="i_table">
 						<div class="i_table_head">
 							<div class="i_row">
 								<div class="i_col w_55">
@@ -177,7 +180,7 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> -->
 				</div>
 				<div class="invoice_payment">
 					<div class="i_row">
@@ -186,21 +189,17 @@
 								<p>Payment Method</p>
 							</div>
 							<div class="p_title">
-								<p>Paypal:</p>
-								<span>paypal@yourcompany.com</span>
-							</div>
-							<div class="p_title">
-								<p>Card Payment:</p>
-								<span>Visa, MasterCard, Paypal</span>
+								<p>Mechanic Number:</p>
+								<span><%= data['mechanicnumber'] %></span>
 							</div>
 						</div>
 						<div class="i_duetotal text_right">
 							<div class="main_title">
-								<p>Total Due</p>
+								<p>Total Amount</p>
 							</div>
 							<div class="p_title">
-								<p>Amout In USD:</p>
-								<span>$150.00</span>
+								<p>Amout In INR:</p>
+								<span><%= data['totalamount'] %></span>
 							</div>
 						</div>
 					</div>
@@ -219,8 +218,7 @@
 			</div>
 		</section>
 		<script>
-			let d = document.querySelector(".date");
-			d.innerHTML = new Date().toLocaleDateString();
+			console.log("successfull");
 		</script>
 	</body>
 </html>

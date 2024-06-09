@@ -1,165 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Invoice Input Form</title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 20px;
-        background-color: #f4f4f4;
-    }
-
-    h1 {
-        text-align: center;
-    }
-
-    form {
-        max-width: 600px;
-        margin: 0 auto;
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
-    fieldset {
-        margin-bottom: 20px;
-        border: 1px solid #ccc;
-        padding: 20px;
-        border-radius: 8px;
-    }
-
-    label {
-        display: block;
-        margin-bottom: 8px;
-    }
-
-    input[type="text"],
-    input[type="number"],
-    input[type="email"],
-    textarea,
-    input[type="date"] {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        margin-bottom: 10px;
-        box-sizing: border-box;
-    }
-
-    input[type="submit"],
-    button {
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    input[type="submit"]:hover,
-    button:hover {
-        background-color: #0056b3;
-    }
-
-    .item {
-        margin-bottom: 10px;
-    }
-
-    @media screen and (max-width: 768px) {
-        form {
-            padding: 10px;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice Input Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
         }
-    }
-</style>
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        fieldset {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="email"],
+        textarea,
+        input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"],
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover,
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .item {
+            margin-bottom: 10px;
+        }
+
+        @media screen and (max-width: 768px) {
+            form {
+                padding: 10px;
+            }
+        }
+    </style>
 </head>
+
 <body>
-<h1>Invoice Input Form</h1>
-<form action="generate_invoice.html" method="post">
-    <fieldset>
-        <legend>Invoice To</legend>
-        <label for="recipientName">Recipient Name:</label>
-        <input type="text" id="recipientName" name="recipientName" required><br>
+    <h1>Invoice Input Form</h1>
+    <form action="/storebill" method="post">
+        <fieldset>
+            <legend>Invoice To</legend>
+            <label for="customerName">Customer Name:</label>
+            <input type="text" id="customerName" name="customerName" readonly required><br>
 
-        <label for="recipientRole">Recipient Role:</label>
-        <input type="text" id="recipientRole" name="recipientRole" required><br>
+            <label for="customerRole">Customer Number:</label>
+            <input type="text" id="customerRole" name="customerRole" readonly required><br>
 
-        <label for="recipientAddress">Recipient Address:</label>
-        <input type="text" id="recipientAddress" name="recipientAddress" required><br>
+            <label for="vehicletype">Vehicle Type:</label>
+            <input type="text" id="vehicletype" name="vehicletype" readonly required><br>
+        </fieldset>
 
-        <label for="recipientCountry">Recipient Country:</label>
-        <input type="text" id="recipientCountry" name="recipientCountry" required><br>
-    </fieldset>
+        <fieldset>
+            <legend>Booking Details</legend>
+            <label for="registerNumber">Register Number</label>
+            <input type="text" id="registerNumber" name="registerNumber" readonly required><br>
 
-    <fieldset>
-        <legend>Invoice Details</legend>
-        <label for="invoiceNumber">Invoice Number:</label>
-        <input type="text" id="invoiceNumber" name="invoiceNumber" required><br>
+            <label for="bookeddate">Booked date : </label>
+            <input type="text" id="bookeddate" name="bookeddate" readonly required><br>
+        </fieldset>
 
-        <label for="invoiceDate">Invoice Date:</label>
-        <input type="date" id="invoiceDate" name="invoiceDate" required><br>
-    </fieldset>
-
-    <fieldset>
-        <legend>Items</legend>
-        <div id="itemContainer">
-            <div class="item">
-                <label for="description1">Description:</label>
-                <input type="text" id="description1" name="description[]" required><br>
-
-                <label for="qty1">Quantity:</label>
-                <input type="number" id="qty1" name="quantity[]" required><br>
-
-                <label for="price1">Price:</label>
-                <input type="number" id="price1" name="price[]" required><br>
+        <fieldset>
+            <legend>Items</legend><br>
+            <p>Enter what new part added to vehicle and provide price for each</p>
+            <div id="itemContainer">
+                <label for="description">Description:</label>
+                <textarea name="description" id="description" rows="25" cols="50" required></textarea>
             </div>
-        </div>
-        <button type="button" onclick="addItem()">Add Item</button>
-    </fieldset>
+        </fieldset>
 
-    <fieldset>
-        <legend>Payment Details</legend>
-        <label for="paypalEmail">Paypal Email:</label>
-        <input type="email" id="paypalEmail" name="paypalEmail" required><br>
+        <fieldset>
+            <legend>Payment Details</legend>
+            <label for="mechanicphno">Mechanic Number : </label>
+            <input type="email" id="mechanicphno" name="mechanicphno" readonly required><br>
 
-        <label for="cardPayment">Card Payment Options:</label>
-        <input type="text" id="cardPayment" name="cardPayment" required><br>
+            <label for="totalDue">Total Amount (With Tax):</label>
+            <input type="number" id="totalDue" name="totalDue" required><br>
+        </fieldset>
 
-        <label for="totalDue">Total Due:</label>
-        <input type="number" id="totalDue" name="totalDue" required><br>
-    </fieldset>
+        <fieldset>
+            <legend>Terms and Conditions</legend>
+            <textarea id="terms" name="terms" rows="4" cols="50" required>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Saepe nemo eligendi inventore? Provident iste cumque quam eaque consequatur architecto, consequuntur molestiae? Corporis, voluptates? Fugit, omnis.
+            </textarea>
+        </fieldset>
 
-    <fieldset>
-        <legend>Terms and Conditions</legend>
-        <textarea id="terms" name="terms" rows="4" cols="50" required>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Saepe nemo eligendi inventore? Provident iste cumque quam eaque consequatur architecto, consequuntur molestiae? Corporis, voluptates? Fugit, omnis.
-        </textarea>
-    </fieldset>
+        <input type="submit" value="Generate Invoice">
+    </form>
 
-    <input type="submit" value="Generate Invoice">
-</form>
+    <script>
+        // function addItem() {
+        //     const numberofitem = document.getElementById("numberofitem").value;
+        //     const container = document.getElementById("itemContainer");
+        //     container.innerHTML = ''; // Clear previous items
+        //     for (let i = 0; i < numberofitem; i++) {
+        //         const newItem = document.createElement("div");
+        //         newItem.className = "item";
+        //         newItem.innerHTML = `
+        //     <label for="description${i}">Description:</label>
+        //     <input type="text" id="description${i}" name="description" required><br>
 
-<script>
-    function addItem() {
-        const container = document.getElementById("itemContainer");
-        const itemCount = container.getElementsByClassName("item").length + 1;
-        const newItem = document.createElement("div");
-        newItem.className = "item";
-        newItem.innerHTML = `
-            <label for="description${itemCount}">Description:</label>
-            <input type="text" id="description${itemCount}" name="description[]" required><br>
+        //     
 
-            <label for="qty${itemCount}">Quantity:</label>
-            <input type="number" id="qty${itemCount}" name="quantity[]" required><br>
+        //     <label for="price${i}">Price:</label>
+        //     <input type="number" id="price${i}" name="price" required><br><br>
+        // `;
+        //         container.appendChild(newItem);
+        //     }
+        //     document.getElementById('items_add').style.visibility = "hidden";
+        // }
 
-            <label for="price${itemCount}">Price:</label>
-            <input type="number" id="price${itemCount}" name="price[]" required><br>
-        `;
-        container.appendChild(newItem);
-    }
-</script>
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const customerId = urlParams.get('customerId');
+        const registernumber = urlParams.get('registernumber');
+        const customernumber = urlParams.get('customernumber');
+        const vehicletype = urlParams.get('vehicletype');
+        const bookeddate = urlParams.get('bookeddate');
+        const mechanicnumber = urlParams.get('mechanicnumber');
+
+        document.getElementById('customerName').value = customerId;
+        document.getElementById('registerNumber').value = registernumber;
+        document.getElementById('customerRole').value = customernumber;
+        document.getElementById('vehicletype').value = vehicletype;
+        document.getElementById('bookeddate').value = bookeddate;
+        document.getElementById('mechanicphno').value = mechanicnumber;
+    </script>
 </body>
+
 </html>

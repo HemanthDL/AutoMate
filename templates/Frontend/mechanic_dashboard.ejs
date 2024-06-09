@@ -27,6 +27,7 @@
 			color: black;
 			top: 150px;
 			left: 550px;
+			z-index: 10;
 		}
 	</style>
 </head>
@@ -143,6 +144,7 @@
 								<% for (let j=0; j < data[i]['vehicletype'].length; j++) {%>
 									<%= data[i]['vehicletype'][j] %>
 										<% } %>
+								<%= data[i]['registernumber'] %>
 							</td>
 							<td class="role">
 								<p id="view_desc">
@@ -155,7 +157,7 @@
 							<td class="edit">
 								<button type="button" id="accept_btn" class="btn btn-primary btn-sm book-slot-btn"
 									data-customeremail="<%= data[i]['customeremail'] %>"
-									data-mechanicemail="<%= data[i]['mechanicemail'] %>">
+									data-mechanicemail="<%= data[i]['mechanicemail'] %>" data-registernumber="<%= data[i]['registernumber'] %>">
 									Accept
 								</button>
 
@@ -205,7 +207,8 @@
 							<td class="active">
 								<% for (let j=0; j < second[i]['vehicletype'].length; j++) {%>
 									<%= second[i]['vehicletype'][j] %>
-										<% } %>
+										<% } %><br>
+									<p><%= second[i]['registernumber'] %></p>
 							</td>
 							<td class="role">
 								<p id="view_desc">
@@ -215,7 +218,7 @@
 							<td class="edit">
 								<button type="button" id="complete_btn" class="btn btn-primary btn-sm book-slot-btn"
 									data-customeremail="<%= second[i]['customeremail'] %>"
-									data-mechanicemail="<%= second[i]['mechanicemail'] %>">
+									data-mechanicemail="<%= second[i]['mechanicemail'] %>" data-registernumber="<%= second[i]['registernumber'] %>">
 									Completed
 								</button>
 							</td>
@@ -259,9 +262,12 @@
 								</p>
 							</td>
 							<td class="active">
-								<% for (let j=0; j < third[i]['vehicletype'].length; j++) {%>
+									<% for (let j=0; j < third[i]['vehicletype'].length; j++) {%>
 									<%= third[i]['vehicletype'][j] %>
-										<% } %>
+								<% } %><br>
+										<p>
+											<%= third[i]['registernumber'] %>
+											</p>
 							</td>
 							<td class="role">
 								<p>
@@ -269,9 +275,9 @@
 								</p>
 							</td>
 							<td class="edit">
-								<button type="button" id="complete_btn" class="btn btn-primary btn-sm book-slot-btn"
-									data-customeremail="<%= third[i]['customeremail'] %>"
-									data-mechanicemail="<%= third[i]['mechanicemail'] %>">
+								<button type="button" id="generate_bill" class="btn btn-primary btn-sm book-slot-btn"
+									data-customername="<%= third[i]['customername'] %>"
+									data-customernumber="<%= third[i]['mobile'] %>" data-registernumber = "<%= third[i]['registernumber'] %>" data-vehicletype = "<%= third[i]['vehicletype'][0] %>" data-bookeddate = "<%= third[i]['bookeddate'] %>" data-mechanicnumber = "<%= mechanicnumber %>">
 									Generate Bill
 								</button>
 							</td>
@@ -327,6 +333,7 @@
 			button.addEventListener('click', async (event) => {
 				const customerId = event.target.getAttribute('data-customeremail');
 				const mechanicId = event.target.getAttribute('data-mechanicemail');
+				const registernumber = event.target.getAttribute('data-registernumber');
 
 				try {
 					const response = await fetch('/update-customer', {
@@ -334,7 +341,7 @@
 						headers: {
 							'Content-Type': 'application/json',
 						},
-						body: JSON.stringify({ customerId, mechanicId }),
+						body: JSON.stringify({ customerId, mechanicId,registernumber }),
 					});
 
 					const result = await response.json();
@@ -359,6 +366,7 @@
 			button.addEventListener('click', async (event) => {
 				const customerId = event.target.getAttribute('data-customeremail');
 				const mechanicId = event.target.getAttribute('data-mechanicemail');
+				const registernumber = event.target.getAttribute('data-registernumber');
 
 				try {
 					const response = await fetch('/iscomplete-customer', {
@@ -366,7 +374,7 @@
 						headers: {
 							'Content-Type': 'application/json',
 						},
-						body: JSON.stringify({ customerId, mechanicId }),
+						body: JSON.stringify({ customerId, mechanicId,registernumber }),
 					});
 
 					const result = await response.json();
@@ -391,6 +399,24 @@
 				let div = document.getElementById('display_desc');
 				div.style.visibility = "visible";
 			})
+		});
+
+
+		let generate_bill = document.querySelectorAll("#generate_bill");
+
+		generate_bill.forEach(button => {
+			button.addEventListener('click', async (event) => {
+				const customerId = event.target.getAttribute('data-customername');
+				const registernumber = event.target.getAttribute('data-registernumber');
+				const customernumber = event.target.getAttribute('data-customernumber');
+				const vehicletype = event.target.getAttribute('data-vehicletype');
+				const bookeddate = event.target.getAttribute('data-bookeddate');
+				const mechanicnumber = event.target.getAttribute('data-mechanicnumber');
+				
+				window.location.href =
+						`/generatebill?customerId=${encodeURIComponent(customerId)}&registernumber=${encodeURIComponent(registernumber)}&customernumber=${encodeURIComponent(customernumber)}&vehicletype=${encodeURIComponent(vehicletype)}&bookeddate=${encodeURIComponent(bookeddate)}&mechanicnumber=${encodeURIComponent(mechanicnumber)}`;
+				
+			});
 		});
 
 
