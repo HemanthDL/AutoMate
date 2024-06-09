@@ -48,10 +48,6 @@ body {
 	cursor: pointer;
 }
 
-#menu .items li:nth-child(1) {
-	border-left: 4px solid white;
-}
-
 #menu .items li i {
 	color: rgb(134, 141, 151);
 	width: 30px;
@@ -126,7 +122,10 @@ body {
 #interface .navigation .profile {
 	display: flex;
 	justify-content: flex-start;
-	align-items: center;
+}
+
+#interface .navigation #profileID {
+	padding-right: 8px;
 }
 
 #interface .navigation .profile i {
@@ -234,15 +233,15 @@ body {
 	border-radius: 8px;
 	/* visibility: hidden; */
 }
-#b1{
+#b1 {
 	visibility: hidden;
 }
-#b2{
+#b2 {
 	visibility: hidden;
 	position: absolute;
 	top: 260px;
 }
-#b3{
+#b3 {
 	visibility: hidden;
 	position: absolute;
 	top: 260px;
@@ -378,6 +377,6 @@ tbody tr td {
 }
 
 .btn:not(:disabled):not(.disabled) {
-    cursor: pointer;
-    border-radius: 10px;
+	cursor: pointer;
+	border-radius: 10px;
 }
