@@ -42,6 +42,7 @@
 				cursor: pointer;
 			}
 
+<<<<<<< HEAD
 			/* CSS for the popup box */
 			#popupBox {
 				display: none;
@@ -53,6 +54,25 @@
 			}
 		</style>
 	</head>
+=======
+		#display_desc {
+			padding: 5px;
+			visibility: hidden;
+			width: 25rem;
+			height: 25rem;
+			overflow: scroll;
+			box-shadow: 1px 1px 1px 1px white;
+			transform: scale(1.2);
+			position: absolute;
+			background-color: white;
+			color: black;
+			top: 150px;
+			left: 550px;
+			z-index: 10;
+		}
+	</style>
+</head>
+>>>>>>> 5f1f696722a3ca35ecc89e402646067ed9dee7c9
 
 	<body>
 		<section id="menu">
@@ -151,8 +171,15 @@
 								<p> <%= data[i]['bookedtime'] %> </p>
 							</td>
 							<td class="active">
+<<<<<<< HEAD
 								<% for (let j=0; j < data[i]['vehicletype'].length; j++) {%> <%=
 								data[i]['vehicletype'][j] %> <% } %>
+=======
+								<% for (let j=0; j < data[i]['vehicletype'].length; j++) {%>
+									<%= data[i]['vehicletype'][j] %>
+										<% } %>
+								<%= data[i]['registernumber'] %>
+>>>>>>> 5f1f696722a3ca35ecc89e402646067ed9dee7c9
 							</td>
 							<td class="role">
 								<p id="view_desc">
@@ -166,8 +193,12 @@
 									id="accept_btn"
 									class="btn btn-primary btn-sm book-slot-btn"
 									data-customeremail="<%= data[i]['customeremail'] %>"
+<<<<<<< HEAD
 									data-mechanicemail="<%= data[i]['mechanicemail'] %>"
 								>
+=======
+									data-mechanicemail="<%= data[i]['mechanicemail'] %>" data-registernumber="<%= data[i]['registernumber'] %>">
+>>>>>>> 5f1f696722a3ca35ecc89e402646067ed9dee7c9
 									Accept
 								</button>
 							</td>
@@ -207,7 +238,13 @@
 							</td>
 							<td class="active">
 								<% for (let j=0; j < second[i]['vehicletype'].length; j++) {%>
+<<<<<<< HEAD
 								<%= second[i]['vehicletype'][j] %> <% } %>
+=======
+									<%= second[i]['vehicletype'][j] %>
+										<% } %><br>
+									<p><%= second[i]['registernumber'] %></p>
+>>>>>>> 5f1f696722a3ca35ecc89e402646067ed9dee7c9
 							</td>
 							<td class="role">
 								<p id="view_desc">
@@ -220,8 +257,12 @@
 									id="complete_btn"
 									class="btn btn-primary btn-sm book-slot-btn"
 									data-customeremail="<%= second[i]['customeremail'] %>"
+<<<<<<< HEAD
 									data-mechanicemail="<%= second[i]['mechanicemail'] %>"
 								>
+=======
+									data-mechanicemail="<%= second[i]['mechanicemail'] %>" data-registernumber="<%= second[i]['registernumber'] %>">
+>>>>>>> 5f1f696722a3ca35ecc89e402646067ed9dee7c9
 									Completed
 								</button>
 							</td>
@@ -257,13 +298,23 @@
 								<p> <%= third[i]['bookedtime'] %> </p>
 							</td>
 							<td class="active">
+<<<<<<< HEAD
 								<% for (let j=0; j < third[i]['vehicletype'].length; j++) {%>
 								<%= third[i]['vehicletype'][j] %> <% } %>
+=======
+									<% for (let j=0; j < third[i]['vehicletype'].length; j++) {%>
+									<%= third[i]['vehicletype'][j] %>
+								<% } %><br>
+										<p>
+											<%= third[i]['registernumber'] %>
+											</p>
+>>>>>>> 5f1f696722a3ca35ecc89e402646067ed9dee7c9
 							</td>
 							<td class="role">
 								<p> Completed </p>
 							</td>
 							<td class="edit">
+<<<<<<< HEAD
 								<button
 									type="button"
 									id="complete_btn"
@@ -271,6 +322,11 @@
 									data-customeremail="<%= third[i]['customeremail'] %>"
 									data-mechanicemail="<%= third[i]['mechanicemail'] %>"
 								>
+=======
+								<button type="button" id="generate_bill" class="btn btn-primary btn-sm book-slot-btn"
+									data-customername="<%= third[i]['customername'] %>"
+									data-customernumber="<%= third[i]['mobile'] %>" data-registernumber = "<%= third[i]['registernumber'] %>" data-vehicletype = "<%= third[i]['vehicletype'][0] %>" data-bookeddate = "<%= third[i]['bookeddate'] %>" data-mechanicnumber = "<%= mechanicnumber %>">
+>>>>>>> 5f1f696722a3ca35ecc89e402646067ed9dee7c9
 									Generate Bill
 								</button>
 							</td>
@@ -309,6 +365,7 @@
 				var profileImage = document.getElementById("profileImage");
 				var popupBox = document.getElementById("popupBox");
 
+<<<<<<< HEAD
 				// Function to show the popup box
 				function showPopup(event) {
 					event.preventDefault();
@@ -316,11 +373,74 @@
 					popupBox.style.display = "block";
 					popupBox.style.right = "10px";
 					popupBox.style.top = "50px";
+=======
+		let acceptbtn = document.querySelectorAll("#accept_btn");
+
+		acceptbtn.forEach(button => {
+			button.addEventListener('click', async (event) => {
+				const customerId = event.target.getAttribute('data-customeremail');
+				const mechanicId = event.target.getAttribute('data-mechanicemail');
+				const registernumber = event.target.getAttribute('data-registernumber');
+
+				try {
+					const response = await fetch('/update-customer', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+						body: JSON.stringify({ customerId, mechanicId,registernumber }),
+					});
+
+					const result = await response.json();
+
+					if (result.success) {
+						window.location.reload();
+						// event.target.innerText = 'Accepted';
+						// event.target.disabled = true;
+					} else {
+						alert('Failed to update customer status');
+					}
+				} catch (error) {
+					console.error('Error updating customer status:', error);
+					alert('Failed to update customer status');
+>>>>>>> 5f1f696722a3ca35ecc89e402646067ed9dee7c9
 				}
 
+<<<<<<< HEAD
 				// Function to hide the popup box
 				function hidePopup() {
 					popupBox.style.display = "none";
+=======
+		let completebtn = document.querySelectorAll("#complete_btn");
+
+		completebtn.forEach(button => {
+			button.addEventListener('click', async (event) => {
+				const customerId = event.target.getAttribute('data-customeremail');
+				const mechanicId = event.target.getAttribute('data-mechanicemail');
+				const registernumber = event.target.getAttribute('data-registernumber');
+
+				try {
+					const response = await fetch('/iscomplete-customer', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+						body: JSON.stringify({ customerId, mechanicId,registernumber }),
+					});
+
+					const result = await response.json();
+
+					if (result.success) {
+						window.location.reload();
+						// event.target.innerText = 'Accepted';
+						// event.target.disabled = true;
+					} else {
+						alert('Failed to update customer status');
+					}
+				} catch (error) {
+					console.error('Error updating customer status:', error);
+					alert('Failed to update customer status');
+>>>>>>> 5f1f696722a3ca35ecc89e402646067ed9dee7c9
 				}
 
 				// Event listener to show the popup box when the image is clicked
@@ -349,6 +469,7 @@
 				menu.classList.toggle("active");
 			});
 
+<<<<<<< HEAD
 			let btn1 = document.getElementById("box1");
 			let btn2 = document.getElementById("box2");
 			let btn3 = document.getElementById("box3");
@@ -376,6 +497,28 @@
 				div2.style.visibility = "hidden";
 				div3.style.visibility = "visible";
 			});
+=======
+		let generate_bill = document.querySelectorAll("#generate_bill");
+
+		generate_bill.forEach(button => {
+			button.addEventListener('click', async (event) => {
+				const customerId = event.target.getAttribute('data-customername');
+				const registernumber = event.target.getAttribute('data-registernumber');
+				const customernumber = event.target.getAttribute('data-customernumber');
+				const vehicletype = event.target.getAttribute('data-vehicletype');
+				const bookeddate = event.target.getAttribute('data-bookeddate');
+				const mechanicnumber = event.target.getAttribute('data-mechanicnumber');
+				
+				window.location.href =
+						`/generatebill?customerId=${encodeURIComponent(customerId)}&registernumber=${encodeURIComponent(registernumber)}&customernumber=${encodeURIComponent(customernumber)}&vehicletype=${encodeURIComponent(vehicletype)}&bookeddate=${encodeURIComponent(bookeddate)}&mechanicnumber=${encodeURIComponent(mechanicnumber)}`;
+				
+			});
+		});
+
+
+	</script>
+</body>
+>>>>>>> 5f1f696722a3ca35ecc89e402646067ed9dee7c9
 
 			let acceptbtn = document.querySelectorAll("#accept_btn");
 

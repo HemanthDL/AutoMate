@@ -13,9 +13,10 @@ router.post('/bookslot', async (req, res) => {
     try {
         let customeremail = req.body.custemail;
         let mechanicemail = req.body.email;
-        const q = await book.findOne({ customeremail: customeremail, mechanicemail: mechanicemail });
+        let regnumber = req.body.registernumber;
+        const q = await book.findOne({customeremail: customeremail, mechanicemail: mechanicemail,registernumber:regnumber});
         if (q) {
-           console.log("for same mechanic booking can be done once")
+           console.log("for same vehicle booking can be done once")
            const a = await shop.find()
            let data = Array.from(a)
            let d = new Date()

@@ -137,240 +137,190 @@
 							</td>
 							<td class="active">
 								<% if (data[i]['timings'].get(day).notavailable == false ){%>
-								<p>Active</p>
+									<p>Active</p>
 								<% }else { %>
-								<p>Not Active</p>
+									<p>Not Active</p>
 								<% } %>
 							</td>
 							<td class="role">
+									<% let arr=data[i]['address'].split(' '); 
+									let last = arr.slice(-2); 
+									let laststr = last.join(' '); %> 
 								<p>
-									<% let arr=data[i]['address'].split(' '); let last =
-									arr.slice(-2); let laststr = last.join(' '); %> <%= laststr %>
+									<%= laststr %>
 								</p>
 							</td>
 							<td class="edit">
-								<button
-									type="button"
-									id="book_slot"
-									class="btn btn-primary btn-sm book-slot-btn"
-									data-shopname="<%= data[i]['shopname'] %>"
-									data-ownername="<%= data[i]['ownername'] %>"
-									data-address="<%= laststr %>"
-									data-email="<%= data[i]['email'] %>"
-									data-customername="<%= name %>"
-									data-mobile="<%= phno %>"
-									data-custemail="<%= conmail %>"
-									>Book Slot</button
-								>
+								<button type="button" id="book_slot" class="btn btn-primary btn-sm book-slot-btn" data-shopname="<%= data[i]['shopname'] %>" data-ownername="<%= data[i]['ownername'] %>" data-address="<%= laststr %>" data-email = "<%= data[i]['email'] %>" data-customername = "<%= name %>" data-mobile = "<%= phno %>" data-custemail = "<%= conmail %>">Book Slot</button>
 							</td>
 						</tr>
 						<% } %>
 					</tbody>
 				</table>
-			</div>
-			<div id="b2" class="board">
-				<table width="100%">
-					<thead>
-						<tr>
-							<td>Shop Name</td>
-							<td>Service Booked</td>
-							<td>Status</td>
-							<td>Address</td>
-							<td>Form Status</td>
-						</tr>
-					</thead>
-					<tbody>
-						<% for (let i = 0; i < second.length; i++){%>
-						<tr>
-							<td class="people">
-								<img src="" alt="" />
-								<div class="people-description">
-									<h5><%= second[i]['shopname'] %> </h5>
-									<p> <%= second[i]['ownername'] %> </p>
-								</div>
-							</td>
-							<td class="people-des">
-								<% for (let j=0; j < second[i]['vehicletype'].length; j++) {%>
-								<p> <%= second[i]['vehicletype'][j] %> </p>
+		</div>
+		<div id="b2" class="board">
+			<table width="100%">
+				<thead>
+					<tr>
+						<td>Shop Name</td>
+						<td>Service Booked</td>
+						<td>Status</td>
+						<td>Address</td>
+						<td>Form Status</td>
+					</tr>
+				</thead>
+				<tbody>
+					<% for (let i = 0; i < second.length; i++){%>
+					<tr>
+						<td class="people">
+							<img src="" alt="" />
+							<div class="people-description">
+								<h5><%= second[i]['shopname'] %>
+									</h5>
+									<p>
+										<%= second[i]['ownername'] %>
+									</p>
+	</div>
+	</td>
+	<td class="people-des">
+		<% for (let j=0; j < second[i]['vehicletype'].length; j++) {%>
+			<p>
+				<%= second[i]['vehicletype'][j] %>
+			</p>
+			<% } %>
+	</td>
+	<td class="active">
+		<% if (data[i]['timings'].get(day).from !="" ){%>
+			<p>Active</p>
+			<% }else { %>
+				<p>Not Active</p>
+				<% } %>
+	</td>
+	<td class="role">
+		<p>
+			<% let arr=data[i]['address'].split(' '); 
+			let last = arr.slice(-2); 
+			let laststr = last.join(' '); %> 
+			<%= laststr %>
+							</p>
+						</td>
+						<td class="edit">
+							<button type="button" class="btn btn-primary btn-sm">
+							<% if (second[i]['isaccepted'] == false){%>
+								Pending
+							<% } else { %>
+								Accepted
+							<% } %></button>
+						</td>
+					</tr>
+					<% } %>
+				</tbody>
+			</table>
+		</div>
+		<div id="b3" class="board">
+			<table width="100%">
+				<thead>
+					<tr>
+						<td>Shop Name</td>
+						<td>Service Available</td>
+						<td>Service Status</td>
+						<td>Address</td>
+						<td>Bill Status</td>
+					</tr>
+				</thead>
+				<tbody>
+					<% for (let i = 0; i < third.length; i++){%>
+					<tr>
+						<td class="people">
+							<img src="" alt="" />
+							<div class="people-description">
+								<h5><%= data[i]['shopname'] %>
+				</h5>
+				<p>
+					<%= data[i]['ownername'] %>
+				</p>
+				</div>
+	</td>
+	<td class="people-des">
+		<% for (let j=0; j < data[i]['serviceAvailable'].length; j++) {%>
+			<p>
+				<%= data[i]['serviceAvailable'][j] %>
+			</p>
+			<% } %>
+	</td>
+	<td class="active">
+		<% if (third[i].iscompleted == false) {%>
+			<p>Working</p>
+		<% } else { %>
+			<p>Completed</p>
+		<% } %>
+	</td>
+	<td class="role">
+		<p>
+			<% let arr=data[i]['address'].split(' '); let last =
+								arr.slice(-2); let laststr = last.join(' '); %> <%= laststr %>
+							</p>
+						</td>
+						<td class="edit">
+							<button type="button" class="btn btn-primary btn-sm">
+								<% if(third[i]['iscompleted'] == true){%>
+									View Bill
+								<% } else {%>
+									Not Generated
 								<% } %>
-							</td>
-							<td class="active">
-								<% if (data[i]['timings'].get(day).from !="" ){%>
-								<p>Active</p>
-								<% }else { %>
-								<p>Not Active</p>
-								<% } %>
-							</td>
-							<td class="role">
-								<p>
-									<% let arr=data[i]['address'].split(' '); let last =
-									arr.slice(-2); let laststr = last.join(' '); %> <%= laststr %>
-								</p>
-							</td>
-							<td class="edit">
-								<button type="button" class="btn btn-primary btn-sm">
-									<% if (second[i]['isaccepted'] == false){%> Pending <% } else
-									{ %> Accepted <% } %></button
-								>
-							</td>
-						</tr>
-						<% } %>
-					</tbody>
-				</table>
-			</div>
-			<div id="b3" class="board">
-				<table width="100%">
-					<thead>
-						<tr>
-							<td>Shop Name</td>
-							<td>Service Available</td>
-							<td>Service Status</td>
-							<td>Address</td>
-							<td>Bill Status</td>
-						</tr>
-					</thead>
-					<tbody>
-						<% for (let i = 0; i < third.length; i++){%>
-						<tr>
-							<td class="people">
-								<img src="" alt="" />
-								<div class="people-description">
-									<h5><%= data[i]['shopname'] %> </h5>
-									<p> <%= data[i]['ownername'] %> </p>
-								</div>
-							</td>
-							<td class="people-des">
-								<% for (let j=0; j < data[i]['serviceAvailable'].length; j++)
-								{%>
-								<p> <%= data[i]['serviceAvailable'][j] %> </p>
-								<% } %>
-							</td>
-							<td class="active">
-								<% if (third[i].iscompleted == false) {%>
-								<p>Working</p>
-								<% } else { %>
-								<p>Completed</p>
-								<% } %>
-							</td>
-							<td class="role">
-								<p>
-									<% let arr=data[i]['address'].split(' '); let last =
-									arr.slice(-2); let laststr = last.join(' '); %> <%= laststr %>
-								</p>
-							</td>
-							<td class="edit">
-								<button type="button" class="btn btn-primary btn-sm">
-									<% if(third[i]['iscompleted'] == true){%> View Bill <% } else
-									{%> Not Generated <% } %>
-								</button>
-							</td>
-						</tr>
-						<% } %>
-					</tbody>
-				</table>
-			</div>
+							</button>
+						</td>
+					</tr>
+					<% } %>
+				</tbody>
+			</table>
+		</div>
 		</section>
 		<script>
-			var nameElement = document.getElementById("profileID");
-			var name = nameElement.innerHTML.trim(); // Trim whitespace
-
-			var firstCharacter = name.charAt(0).toUpperCase();
-
-			var canvas = document.createElement("canvas");
-			var context = canvas.getContext("2d");
-			canvas.width = 100; // Adjust width and height as per your requirement
-			canvas.height = 100;
-			context.fillStyle = "#F2AA4CFF"; // Background color to match black text
-			context.fillRect(0, 0, canvas.width, canvas.height); // Fill background
-			context.fillStyle = "#101820FF"; // Text color
-			context.font = "bold 60px Arial"; // Font style and size
-			context.textAlign = "center";
-			context.textBaseline = "middle";
-			context.fillText(firstCharacter, canvas.width / 2, canvas.height / 2);
-
-			var dataURL = canvas.toDataURL();
-
-			var profileImage = document.getElementById("profileImage");
-			profileImage.src = dataURL;
-
-			document.addEventListener("DOMContentLoaded", function () {
-				// Get the profile image and popup box elements
-				var profileImage = document.getElementById("profileImage");
-				var popupBox = document.getElementById("popupBox");
-
-				// Function to show the popup box
-				function showPopup(event) {
-					event.preventDefault();
-					// Display the popup box at the position of the clicked image
-					popupBox.style.display = "block";
-					popupBox.style.right = "10px";
-					popupBox.style.top = "50px";
-				}
-
-				// Function to hide the popup box
-				function hidePopup() {
-					popupBox.style.display = "none";
-				}
-
-				// Event listener to show the popup box when the image is clicked
-				profileImage.addEventListener("click", showPopup);
-
-				// Event listener to hide the popup box when clicking outside of it
-				document.addEventListener("click", function (event) {
-					if (event.target !== profileImage && event.target !== popupBox) {
-						hidePopup();
-					}
-				});
-
-				// Event listener for logout option in the popup box
-				var logoutLink = document.getElementById("logoutLink");
-				logoutLink.addEventListener("click", function (event) {
-					event.preventDefault();
-					// Perform logout action here, for example redirecting to logout page
-					window.location.href = "/";
-				});
-			});
-
 			const menuButton = document.getElementById("menu-btn");
 			const menu = document.getElementById("menu");
 
-			menuButton.addEventListener("click", function () {
-				menu.classList.toggle("active");
-			});
+		menuButton.addEventListener("click", function () {
+			menu.classList.toggle("active");
+		});
 
-			let btn1 = document.getElementById("box1");
-			let btn2 = document.getElementById("box2");
-			let btn3 = document.getElementById("box3");
-			btn1.addEventListener("click", (event) => {
-				let div1 = document.getElementById("b1");
-				let div2 = document.getElementById("b2");
-				let div3 = document.getElementById("b3");
+			let btn1 = document.getElementById('box1');
+			let btn2 = document.getElementById('box2'); 
+			let btn3 = document.getElementById('box3'); 
+			btn1.addEventListener('click', (event) => {
+				
+				let div1 = document.getElementById('b1');
+				let div2 = document.getElementById('b2');
+				let div3 = document.getElementById('b3');
 				div1.style.visibility = "visible";
 				div2.style.visibility = "hidden";
 				div3.style.visibility = "hidden";
 			});
-			btn2.addEventListener("click", (event) => {
-				let div1 = document.getElementById("b1");
-				let div2 = document.getElementById("b2");
-				let div3 = document.getElementById("b3");
+			btn2.addEventListener('click', (event) => {
+				
+				let div1 = document.getElementById('b1');
+				let div2 = document.getElementById('b2');
+				let div3 = document.getElementById('b3');
 				div1.style.visibility = "hidden";
 				div2.style.visibility = "visible";
 				div3.style.visibility = "hidden";
 			});
-			btn3.addEventListener("click", (event) => {
-				let div1 = document.getElementById("b1");
-				let div2 = document.getElementById("b2");
-				let div3 = document.getElementById("b3");
+			btn3.addEventListener('click', (event) => {
+				
+				let div1 = document.getElementById('b1');
+				let div2 = document.getElementById('b2');
+				let div3 = document.getElementById('b3');
 				div1.style.visibility = "hidden";
 				div2.style.visibility = "hidden";
 				div3.style.visibility = "visible";
 			});
 
+			
 			let a = Array.from(document.querySelectorAll("#book_slot"));
 			console.log(a);
 
-			a.forEach((button) => {
-				button.addEventListener("click", function (event) {
+			a.forEach(button => {
+				button.addEventListener('click', function (event) {
 					event.preventDefault();
 					const shopName = this.dataset.shopname;
 					const ownerName = this.dataset.ownername;
@@ -380,24 +330,18 @@
 					const mobile = this.dataset.mobile;
 					const custemail = this.dataset.custemail;
 
-					console.log("Shop Name:", shopName);
-					console.log("Owner Name:", ownerName);
-					console.log("Address:", address);
-					console.log("Email : ", email);
+					console.log('Shop Name:', shopName);
+					console.log('Owner Name:', ownerName);
+					console.log('Address:', address);
+					console.log('Email : ',email);
 
-					window.location.href = `/booking?shopname=${encodeURIComponent(
-						shopName,
-					)}&ownername=${encodeURIComponent(
-						ownerName,
-					)}&address=${encodeURIComponent(address)}&email=${encodeURIComponent(
-						email,
-					)}&customername=${encodeURIComponent(
-						customername,
-					)}&mobile=${encodeURIComponent(
-						mobile,
-					)}&custemail=${encodeURIComponent(custemail)}`;
+					window.location.href =
+						`/booking?shopname=${encodeURIComponent(shopName)}&ownername=${encodeURIComponent(ownerName)}&address=${encodeURIComponent(address)}&email=${encodeURIComponent(email)}&customername=${encodeURIComponent(customername)}&mobile=${encodeURIComponent(mobile)}&custemail=${encodeURIComponent(custemail)}`;
 				});
 			});
+
+
 		</script>
-	</body>
+</body>
+
 </html>
