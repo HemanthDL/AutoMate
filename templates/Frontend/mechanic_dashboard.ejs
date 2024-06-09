@@ -181,7 +181,8 @@
 							<td class="active">
 								<% for (let j=0; j < data[i]['vehicletype'].length; j++) {%>
 									<%= data[i]['vehicletype'][j] %>
-								<% } %>
+								<% } %> <br>
+								<p><%= data[i]['registernumber'] %></p>
 							</td>
 							<td class="role">
 								<p id="view_desc">
@@ -244,7 +245,8 @@
 							<td class="active">
 								<% for (let j=0; j < second[i]['vehicletype'].length; j++) {%>
 									<%= second[i]['vehicletype'][j] %>
-								<% } %>
+								<% } %> <br>
+								<p><%= second[i]['registernumber'] %></p>
 							</td>
 							<td class="role">
 								<p id="view_desc">
@@ -300,7 +302,8 @@
 							<td class="active">
 								<% for (let j=0; j < third[i]['vehicletype'].length; j++) {%>
 									<%= third[i]['vehicletype'][j] %>
-								<% } %>
+								<% } %> <br>
+								<p><%= third[i]['registernumber'] %></p>
 							</td>
 							<td class="role">
 								<p> Completed </p>
