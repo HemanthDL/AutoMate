@@ -68,7 +68,7 @@
 <body>
 	<section id="menu">
 		<div class="logo">
-			<img src="" alt="Logo" />
+			<img alt="Logo" />
 			<h2>AutoMate</h2>
 		</div>
 		<div class="items">
@@ -160,9 +160,9 @@
 					<% for (let i=0; i < data.length; i++){%>
 						<tr>
 							<td class="people">
-								<img src="" alt="" />
+								<img id="C_img" src="" alt="" />
 								<div class="people-description">
-									<h5>
+									<h5 id="Cname">
 										<%= data[i]['customername'] %>
 									</h5>
 									<p>
@@ -181,8 +181,10 @@
 							<td class="active">
 								<% for (let j=0; j < data[i]['vehicletype'].length; j++) {%>
 									<%= data[i]['vehicletype'][j] %>
-								<% } %> <br>
-								<p><%= data[i]['registernumber'] %></p>
+										<% } %> <br>
+											<p>
+												<%= data[i]['registernumber'] %>
+											</p>
 							</td>
 							<td class="role">
 								<p id="view_desc">
@@ -245,8 +247,10 @@
 							<td class="active">
 								<% for (let j=0; j < second[i]['vehicletype'].length; j++) {%>
 									<%= second[i]['vehicletype'][j] %>
-								<% } %> <br>
-								<p><%= second[i]['registernumber'] %></p>
+										<% } %> <br>
+											<p>
+												<%= second[i]['registernumber'] %>
+											</p>
 							</td>
 							<td class="role">
 								<p id="view_desc">
@@ -302,8 +306,10 @@
 							<td class="active">
 								<% for (let j=0; j < third[i]['vehicletype'].length; j++) {%>
 									<%= third[i]['vehicletype'][j] %>
-								<% } %> <br>
-								<p><%= third[i]['registernumber'] %></p>
+										<% } %> <br>
+											<p>
+												<%= third[i]['registernumber'] %>
+											</p>
 							</td>
 							<td class="role">
 								<p> Completed </p>
@@ -311,10 +317,15 @@
 							<td class="edit">
 								<button type="button" id="generate_bill" class="btn btn-primary btn-sm book-slot-btn"
 									data-customername="<%= third[i]['customername'] %>"
-									data-customernumber="<%= third[i]['mobile'] %>" data-registernumber = "<%= third[i]['registernumber'] %>" data-vehicletype = "<%= third[i]['vehicletype'][0] %>" data-bookeddate = "<%= third[i]['bookeddate'] %>" data-mechanicnumber = "<%= mechanicnumber %>">
+									data-customernumber="<%= third[i]['mobile'] %>"
+									data-registernumber="<%= third[i]['registernumber'] %>"
+									data-vehicletype="<%= third[i]['vehicletype'][0] %>"
+									data-bookeddate="<%= third[i]['bookeddate'] %>"
+									data-mechanicnumber="<%= mechanicnumber %>">
 									Generate Bill
 								</button>
-
+								<button type="button" class="btn btn-success btn-sm book-slot-btn"><i
+										class="fa-solid fa-indian-rupee-sign"></i></button>
 							</td>
 						</tr>
 						<% } %>
@@ -325,18 +336,18 @@
 
 	<script>
 		var nameElement = document.getElementById("profileID");
-		var name = nameElement.innerHTML.trim(); // Trim whitespace
+		var name = nameElement.innerHTML.trim();
 
 		var firstCharacter = name.charAt(0).toUpperCase();
 
 		var canvas = document.createElement("canvas");
 		var context = canvas.getContext("2d");
-		canvas.width = 100; 
+		canvas.width = 100;
 		canvas.height = 100;
-		context.fillStyle = "#F2AA4CFF"; 
-		context.fillRect(0, 0, canvas.width, canvas.height); 
-		context.fillStyle = "#101820FF"; 
-		context.font = "bold 60px Arial"; 
+		context.fillStyle = "#F2AA4CFF";
+		context.fillRect(0, 0, canvas.width, canvas.height);
+		context.fillStyle = "#101820FF";
+		context.font = "bold 60px Arial";
 		context.textAlign = "center";
 		context.textBaseline = "middle";
 		context.fillText(firstCharacter, canvas.width / 2, canvas.height / 2);
@@ -346,11 +357,13 @@
 		var profileImage = document.getElementById("profileImage");
 		profileImage.src = dataURL;
 
-			// Get the profile image and popup box elements
+		// Profile image creation for customer in table-list
+
+		// Get the profile image and popup box elements
 		var profileImage = document.getElementById("profileImage");
 		var popupBox = document.getElementById("popupBox");
 
-			// Function to show the popup box
+		// Function to show the popup box
 		function showPopup(event) {
 			event.preventDefault();
 			// Display the popup box at the position of the clicked image
@@ -358,17 +371,17 @@
 			popupBox.style.right = "10px";
 			popupBox.style.top = "50px";
 		}
-					// Event listener to show the popup box when the image is clicked
+		// Event listener to show the popup box when the image is clicked
 		profileImage.addEventListener("click", showPopup);
 
-					// Event listener to hide the popup box when clicking outside of it
+		// Event listener to hide the popup box when clicking outside of it
 		document.addEventListener("click", function (event) {
 			if (event.target !== profileImage && event.target !== popupBox) {
 				hidePopup();
 			}
 		});
 
-					// Event listener for logout option in the popup box
+		// Event listener for logout option in the popup box
 		var logoutLink = document.getElementById("logoutLink");
 		logoutLink.addEventListener("click", function (event) {
 			event.preventDefault();
@@ -376,115 +389,115 @@
 			window.location.href = "/";
 		});
 
-			const menuButton = document.getElementById("menu-btn");
-			const menu = document.getElementById("menu");
+		const menuButton = document.getElementById("menu-btn");
+		const menu = document.getElementById("menu");
 
-			menuButton.addEventListener("click", function () {
-				menu.classList.toggle("active");
-			});
+		menuButton.addEventListener("click", function () {
+			menu.classList.toggle("active");
+		});
 
-			let btn1 = document.getElementById("box1");
-			let btn2 = document.getElementById("box2");
-			let btn3 = document.getElementById("box3");
-			btn1.addEventListener("click", (event) => {
-				let div1 = document.getElementById("b1");
-				let div2 = document.getElementById("b2");
-				let div3 = document.getElementById("b3");
-				div1.style.visibility = "visible";
-				div2.style.visibility = "hidden";
-				div3.style.visibility = "hidden";
-			});
-			btn2.addEventListener("click", (event) => {
-				let div1 = document.getElementById("b1");
-				let div2 = document.getElementById("b2");
-				let div3 = document.getElementById("b3");
-				div1.style.visibility = "hidden";
-				div2.style.visibility = "visible";
-				div3.style.visibility = "hidden";
-			});
-			btn3.addEventListener("click", (event) => {
-				let div1 = document.getElementById("b1");
-				let div2 = document.getElementById("b2");
-				let div3 = document.getElementById("b3");
-				div1.style.visibility = "hidden";
-				div2.style.visibility = "hidden";
-				div3.style.visibility = "visible";
-			});
+		let btn1 = document.getElementById("box1");
+		let btn2 = document.getElementById("box2");
+		let btn3 = document.getElementById("box3");
+		btn1.addEventListener("click", (event) => {
+			let div1 = document.getElementById("b1");
+			let div2 = document.getElementById("b2");
+			let div3 = document.getElementById("b3");
+			div1.style.visibility = "visible";
+			div2.style.visibility = "hidden";
+			div3.style.visibility = "hidden";
+		});
+		btn2.addEventListener("click", (event) => {
+			let div1 = document.getElementById("b1");
+			let div2 = document.getElementById("b2");
+			let div3 = document.getElementById("b3");
+			div1.style.visibility = "hidden";
+			div2.style.visibility = "visible";
+			div3.style.visibility = "hidden";
+		});
+		btn3.addEventListener("click", (event) => {
+			let div1 = document.getElementById("b1");
+			let div2 = document.getElementById("b2");
+			let div3 = document.getElementById("b3");
+			div1.style.visibility = "hidden";
+			div2.style.visibility = "hidden";
+			div3.style.visibility = "visible";
+		});
 
-			let acceptbtn = document.querySelectorAll("#accept_btn");
+		let acceptbtn = document.querySelectorAll("#accept_btn");
 
-			acceptbtn.forEach((button) => {
-				button.addEventListener("click", async (event) => {
-					const customerId = event.target.getAttribute("data-customeremail");
-					const mechanicId = event.target.getAttribute("data-mechanicemail");
+		acceptbtn.forEach((button) => {
+			button.addEventListener("click", async (event) => {
+				const customerId = event.target.getAttribute("data-customeremail");
+				const mechanicId = event.target.getAttribute("data-mechanicemail");
 
-					try {
-						const response = await fetch("/update-customer", {
-							method: "POST",
-							headers: {
-								"Content-Type": "application/json",
-							},
-							body: JSON.stringify({ customerId, mechanicId }),
-						});
+				try {
+					const response = await fetch("/update-customer", {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify({ customerId, mechanicId }),
+					});
 
-						const result = await response.json();
+					const result = await response.json();
 
-						if (result.success) {
-							window.location.reload();
-							// event.target.innerText = 'Accepted';
-							// event.target.disabled = true;
-						} else {
-							alert("Failed to update customer status");
-						}
-					} catch (error) {
-						console.error("Error updating customer status:", error);
+					if (result.success) {
+						window.location.reload();
+						// event.target.innerText = 'Accepted';
+						// event.target.disabled = true;
+					} else {
 						alert("Failed to update customer status");
 					}
-				});
+				} catch (error) {
+					console.error("Error updating customer status:", error);
+					alert("Failed to update customer status");
+				}
 			});
+		});
 
-			let completebtn = document.querySelectorAll("#complete_btn");
+		let completebtn = document.querySelectorAll("#complete_btn");
 
-			completebtn.forEach((button) => {
-				button.addEventListener("click", async (event) => {
-					const customerId = event.target.getAttribute("data-customeremail");
-					const mechanicId = event.target.getAttribute("data-mechanicemail");
+		completebtn.forEach((button) => {
+			button.addEventListener("click", async (event) => {
+				const customerId = event.target.getAttribute("data-customeremail");
+				const mechanicId = event.target.getAttribute("data-mechanicemail");
 
-					try {
-						const response = await fetch("/iscomplete-customer", {
-							method: "POST",
-							headers: {
-								"Content-Type": "application/json",
-							},
-							body: JSON.stringify({ customerId, mechanicId }),
-						});
+				try {
+					const response = await fetch("/iscomplete-customer", {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify({ customerId, mechanicId }),
+					});
 
-						const result = await response.json();
+					const result = await response.json();
 
-						if (result.success) {
-							window.location.reload();
-							// event.target.innerText = 'Accepted';
-							// event.target.disabled = true;
-						} else {
-							alert("Failed to update customer status");
-						}
-					} catch (error) {
-						console.error("Error updating customer status:", error);
+					if (result.success) {
+						window.location.reload();
+						// event.target.innerText = 'Accepted';
+						// event.target.disabled = true;
+					} else {
 						alert("Failed to update customer status");
 					}
-				});
+				} catch (error) {
+					console.error("Error updating customer status:", error);
+					alert("Failed to update customer status");
+				}
 			});
+		});
 
-			let p = document.querySelectorAll("#view_desc");
-			p.forEach((button) => {
-				button.addEventListener("click", (e) => {
-					let div = document.getElementById("display_desc");
-					div.style.visibility = "visible";
-				});
+		let p = document.querySelectorAll("#view_desc");
+		p.forEach((button) => {
+			button.addEventListener("click", (e) => {
+				let div = document.getElementById("display_desc");
+				div.style.visibility = "visible";
 			});
-			let generate_bill = document.querySelectorAll("#generate_bill");
+		});
+		let generate_bill = document.querySelectorAll("#generate_bill");
 
-			generate_bill.forEach(button => {
+		generate_bill.forEach(button => {
 			button.addEventListener('click', async (event) => {
 				const customerId = event.target.getAttribute('data-customername');
 				const registernumber = event.target.getAttribute('data-registernumber');
@@ -492,13 +505,11 @@
 				const vehicletype = event.target.getAttribute('data-vehicletype');
 				const bookeddate = event.target.getAttribute('data-bookeddate');
 				const mechanicnumber = event.target.getAttribute('data-mechanicnumber');
-				
+
 				window.location.href =
-						`/generatebill?customerId=${encodeURIComponent(customerId)}&registernumber=${encodeURIComponent(registernumber)}&customernumber=${encodeURIComponent(customernumber)}&vehicletype=${encodeURIComponent(vehicletype)}&bookeddate=${encodeURIComponent(bookeddate)}&mechanicnumber=${encodeURIComponent(mechanicnumber)}`;
-				
+					`/generatebill?customerId=${encodeURIComponent(customerId)}&registernumber=${encodeURIComponent(registernumber)}&customernumber=${encodeURIComponent(customernumber)}&vehicletype=${encodeURIComponent(vehicletype)}&bookeddate=${encodeURIComponent(bookeddate)}&mechanicnumber=${encodeURIComponent(mechanicnumber)}`;
 			});
 		});
-
 	</script>
 </body>
 

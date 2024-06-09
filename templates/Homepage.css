@@ -10,17 +10,18 @@ body {
 	height: 100vh;
 }
 
-.front_pic{
+.front_pic {
 	position: absolute;
-    top: 120px;
-    right: 100px;
-    z-index: -1;
+	top: 120px;
+	right: 100px;
+	z-index: -1;
 }
-.text{
+
+.text {
 	position: absolute;
-    top: 200px;
-    left: 97px;
-    z-index: -1;
+	top: 200px;
+	left: 97px;
+	z-index: -1;
 }
 
 .nav {
@@ -104,7 +105,7 @@ body {
 	top: 90px;
 	width: 98px;
 	height: 290px;
-	z-index: 1;
+	z-index: -1;
 }
 
 .banner .text {

@@ -301,6 +301,27 @@
 		</div>
 	</section>
 	<script>
+		var nameElement = document.getElementById("profileID");
+		var name = nameElement.innerHTML.trim();
+
+		var firstCharacter = name.charAt(0).toUpperCase();
+
+		var canvas = document.createElement("canvas");
+		var context = canvas.getContext("2d");
+		canvas.width = 100; 
+		canvas.height = 100;
+		context.fillStyle = "#F2AA4CFF"; 
+		context.fillRect(0, 0, canvas.width, canvas.height); 
+		context.fillStyle = "#101820FF"; 
+		context.font = "bold 60px Arial"; 
+		context.textAlign = "center";
+		context.textBaseline = "middle";
+		context.fillText(firstCharacter, canvas.width / 2, canvas.height / 2);
+
+		var dataURL = canvas.toDataURL();
+
+		var profileImage = document.getElementById("profileImage");
+		profileImage.src = dataURL;
 		const menuButton = document.getElementById("menu-btn");
 		const menu = document.getElementById("menu");
 
