@@ -235,7 +235,7 @@
 							<td class="edit">
 								<button type="button" id="accept_btn" class="btn btn-primary btn-sm book-slot-btn"
 									data-customeremail="<%= data[i]['customeremail'] %>"
-									data-mechanicemail="<%= data[i]['mechanicemail'] %>">
+									data-mechanicemail="<%= data[i]['mechanicemail'] %>" data-registernumber="<%= data[i]['registernumber'] %>">
 									Accept
 								</button>
 							</td>
@@ -310,7 +310,7 @@
 							<td class="edit">
 								<button type="button" id="complete_btn" class="btn btn-primary btn-sm book-slot-btn"
 									data-customeremail="<%= second[i]['customeremail'] %>"
-									data-mechanicemail="<%= second[i]['mechanicemail'] %>">
+									data-mechanicemail="<%= second[i]['mechanicemail'] %>" data-registernumber="<%= second[i]['registernumber'] %>">
 									Completed
 								</button>
 							</td>
@@ -487,6 +487,7 @@
 			button.addEventListener("click", async (event) => {
 				const customerId = event.target.getAttribute("data-customeremail");
 				const mechanicId = event.target.getAttribute("data-mechanicemail");
+				const registernumber = event.target.getAttribute('data-registernumber');
 
 				try {
 					const response = await fetch("/update-customer", {
@@ -494,7 +495,7 @@
 						headers: {
 							"Content-Type": "application/json",
 						},
-						body: JSON.stringify({ customerId, mechanicId }),
+						body: JSON.stringify({ customerId, mechanicId,registernumber }),
 					});
 
 					const result = await response.json();
@@ -519,6 +520,7 @@
 			button.addEventListener("click", async (event) => {
 				const customerId = event.target.getAttribute("data-customeremail");
 				const mechanicId = event.target.getAttribute("data-mechanicemail");
+				const registernumber = event.target.getAttribute('data-registernumber');
 
 				try {
 					const response = await fetch("/iscomplete-customer", {
@@ -526,7 +528,7 @@
 						headers: {
 							"Content-Type": "application/json",
 						},
-						body: JSON.stringify({ customerId, mechanicId }),
+						body: JSON.stringify({ customerId, mechanicId,registernumber }),
 					});
 
 					const result = await response.json();
@@ -545,15 +547,15 @@
 			});
 		});
 
-		let p = document.querySelectorAll("#view_desc");
-		p.forEach((button) => {
-			button.addEventListener("click", (e) => {
-				let div = document.querySelectorAll("#display_desc");
-				div.forEach((label) => {
-					label.style.visibility = "visible";
-				})
-			});
-		});
+		// let p = document.querySelectorAll("#view_desc");
+		// p.forEach((button) => {
+		// 	button.addEventListener("click", (e) => {
+		// 		let div = document.querySelectorAll("#display_desc");
+		// 		div.forEach((label) => {
+		// 			label.style.visibility = "visible";
+		// 		})
+		// 	});
+		// });
 		let generate_bill = document.querySelectorAll("#generate_bill");
 
 		generate_bill.forEach(button => {
@@ -604,13 +606,13 @@
 		}
 		createProfileImages();
 
-		const cancel = document.querySelectorAll("#cancel_icon");
-		cancel.forEach(button => {
-			button.addEventListener('click', (event) => {
-				event.preventDefault();
-				window.location.reload();
-			});
-		});
+		// const cancel = document.querySelectorAll("#cancel_icon");
+		// cancel.forEach(button => {
+		// 	button.addEventListener('click', (event) => {
+		// 		event.preventDefault();
+		// 		window.location.reload();
+		// 	});
+		// });
 
 	</script>
 </body>

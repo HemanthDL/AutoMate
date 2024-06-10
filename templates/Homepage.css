@@ -109,6 +109,10 @@ body {
 	align-items: center;
 }
 
+.nav .navigation ul li a:hover {
+	color: #fe2f40;
+  }
+
 .footer img {
 	margin-left: 10px;
 	width: 45px;
