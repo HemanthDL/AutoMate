@@ -10,11 +10,16 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
 		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
 	<style>
+		@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
+
 		body {
 			position: relative;
 		}
 
 		#display_desc {
+			font-family: "EB Garamond", serif;
+			display: flex;
+			flex-direction: column;
 			padding: 5px;
 			visibility: hidden;
 			width: 25rem;
@@ -27,6 +32,28 @@
 			color: black;
 			top: 150px;
 			left: 550px;
+			border: 1px solid black;
+			border-radius: 10px;
+		}
+
+		#display_desc h2,
+		h5 {
+			display: flex;
+			justify-content: center;
+		}
+
+		#desc_content {
+			display: flex;
+			justify-content: center;
+		}
+
+		#desc_content p {
+			border: 1px solid black;
+			border-radius: 10px;
+			width: fit-content;
+			max-height: 50px;
+			padding: 15px;
+			font-family: "EB Garamond";
 		}
 
 		#menu .items li:nth-child(2) {
@@ -62,6 +89,13 @@
 			top: 150px;
 			left: 550px;
 			z-index: 10;
+		}
+
+		#cancel_icon {
+			position: absolute;
+			top: 5px;
+			right: 5px;
+			cursor: pointer;
 		}
 	</style>
 
@@ -153,7 +187,7 @@
 						<td>Booking Date</td>
 						<td>Vehicle Type</td>
 						<td>Problem-Description</td>
-						<td></td>
+						<td>Request Status</td>
 					</tr>
 				</thead>
 				<tbody>
@@ -180,19 +214,23 @@
 							</td>
 							<td class="active">
 								<% for (let j=0; j < data[i]['vehicletype'].length; j++) {%>
-									<%= data[i]['vehicletype'][j] %>
-										<% } %> <br>
+									<center>
+										<h6>
+											<%= data[i]['vehicletype'][j] %>
+										</h6>
+
+										<% } %>
 											<p>
 												<%= data[i]['registernumber'] %>
 											</p>
+									</center>
 							</td>
 							<td class="role">
-								<p id="view_desc">
-									<a href="#">View Description</a>
-								</p>
-								<div id="display_desc">
-									<%= data[i]['complaint'] %>
-								</div>
+								<center>
+									<p id="view_desc">
+										<a href="#">View Description</a>
+									</p>
+								</center>
 							</td>
 							<td class="edit">
 								<button type="button" id="accept_btn" class="btn btn-primary btn-sm book-slot-btn"
@@ -204,8 +242,16 @@
 						</tr>
 				</tbody>
 				<div id="display_desc">
-					Customer Details<br />Complaint<br />
-					<%= data[i]['complaint'] %>
+					<i class="fa-solid fa-circle-xmark" id="cancel_icon"></i>
+					<h2>Customer Details</h2>
+					<br />
+					<h5>Complaints</h5>
+					<br />
+					<div id="desc_content">
+						<p>
+							<%= data[i]['complaint'] %>
+						</p>
+					</div>
 				</div>
 				<% } %>
 			</table>
@@ -219,7 +265,7 @@
 						<td>Booking Date</td>
 						<td>Vehicle Type</td>
 						<td>Problem-Description</td>
-						<td></td>
+						<td>Work Status</td>
 					</tr>
 				</thead>
 				<tbody>
@@ -246,11 +292,15 @@
 							</td>
 							<td class="active">
 								<% for (let j=0; j < second[i]['vehicletype'].length; j++) {%>
-									<%= second[i]['vehicletype'][j] %>
-										<% } %> <br>
+									<center>
+										<h6>
+											<%= second[i]['vehicletype'][j] %>
+										</h6>
+										<% } %>
 											<p>
 												<%= second[i]['registernumber'] %>
 											</p>
+									</center>
 							</td>
 							<td class="role">
 								<p id="view_desc">
@@ -278,7 +328,7 @@
 						<td>Booking Date</td>
 						<td>Vehicle Type</td>
 						<td>Status</td>
-						<td></td>
+						<td>Bill Status</td>
 					</tr>
 				</thead>
 				<tbody>
@@ -305,11 +355,15 @@
 							</td>
 							<td class="active">
 								<% for (let j=0; j < third[i]['vehicletype'].length; j++) {%>
-									<%= third[i]['vehicletype'][j] %>
-										<% } %> <br>
+									<center>
+										<h6>
+											<%= third[i]['vehicletype'][j] %>
+										</h6>
+										<% } %>
 											<p>
 												<%= third[i]['registernumber'] %>
 											</p>
+									</center>
 							</td>
 							<td class="role">
 								<p> Completed </p>
@@ -325,7 +379,7 @@
 									Generate Bill
 								</button>
 								<button type="button" class="btn btn-success btn-sm book-slot-btn"><i
-										class="fa-solid fa-indian-rupee-sign"></i></button>
+										class="fa-solid fa-indian-rupee-sign"></i> Paid</button>
 							</td>
 						</tr>
 						<% } %>
@@ -357,8 +411,6 @@
 		var profileImage = document.getElementById("profileImage");
 		profileImage.src = dataURL;
 
-		// Profile image creation for customer in table-list
-
 		// Get the profile image and popup box elements
 		var profileImage = document.getElementById("profileImage");
 		var popupBox = document.getElementById("popupBox");
@@ -371,13 +423,18 @@
 			popupBox.style.right = "10px";
 			popupBox.style.top = "50px";
 		}
+		function hidePopup(event) {
+			event.preventDefault();
+
+			popupBox.style.display = "none";
+		}
 		// Event listener to show the popup box when the image is clicked
 		profileImage.addEventListener("click", showPopup);
 
 		// Event listener to hide the popup box when clicking outside of it
 		document.addEventListener("click", function (event) {
 			if (event.target !== profileImage && event.target !== popupBox) {
-				hidePopup();
+				hidePopup(event);
 			}
 		});
 
@@ -491,8 +548,10 @@
 		let p = document.querySelectorAll("#view_desc");
 		p.forEach((button) => {
 			button.addEventListener("click", (e) => {
-				let div = document.getElementById("display_desc");
-				div.style.visibility = "visible";
+				let div = document.querySelectorAll("#display_desc");
+				div.forEach((label) => {
+					label.style.visibility = "visible";
+				})
 			});
 		});
 		let generate_bill = document.querySelectorAll("#generate_bill");
@@ -511,7 +570,7 @@
 			});
 		});
 
-
+		// Profile image creation for customer in table-list
 		function createProfileImages() {
 			var customerNames = document.querySelectorAll(".people-description h5");
 			customerNames.forEach(function (nameElement) {
@@ -543,9 +602,16 @@
 				}
 			});
 		}
-
-		// Call the function to create profile images when the DOM is loaded
 		createProfileImages();
+
+		const cancel = document.querySelectorAll("#cancel_icon");
+		cancel.forEach(button => {
+			button.addEventListener('click', (event) => {
+				event.preventDefault();
+				window.location.reload();
+			});
+		});
+
 	</script>
 </body>
 
