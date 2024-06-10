@@ -160,7 +160,7 @@
 					<% for (let i=0; i < data.length; i++){%>
 						<tr>
 							<td class="people">
-								<img id="C_img" src="" alt="" />
+								<img src="" alt="Profile Image" />
 								<div class="people-description">
 									<h5 id="Cname">
 										<%= data[i]['customername'] %>
@@ -510,6 +510,42 @@
 					`/generatebill?customerId=${encodeURIComponent(customerId)}&registernumber=${encodeURIComponent(registernumber)}&customernumber=${encodeURIComponent(customernumber)}&vehicletype=${encodeURIComponent(vehicletype)}&bookeddate=${encodeURIComponent(bookeddate)}&mechanicnumber=${encodeURIComponent(mechanicnumber)}`;
 			});
 		});
+
+
+		function createProfileImages() {
+			var customerNames = document.querySelectorAll(".people-description h5");
+			customerNames.forEach(function (nameElement) {
+				var name = nameElement.textContent.trim();
+				var firstCharacter = name.charAt(0).toUpperCase();
+
+				var canvas = document.createElement("canvas");
+				var context = canvas.getContext("2d");
+				canvas.width = 100;
+				canvas.height = 100;
+				context.fillStyle = "#F2AA4CFF";
+				context.fillRect(0, 0, canvas.width, canvas.height);
+				context.fillStyle = "#101820FF";
+				context.font = "bold 60px Arial";
+				context.textAlign = "center";
+				context.textBaseline = "middle";
+				context.fillText(firstCharacter, canvas.width / 2, canvas.height / 2);
+
+				var dataURL = canvas.toDataURL();
+				var profileImage = document.createElement("img");
+				profileImage.src = dataURL;
+
+				var parentDiv = nameElement.closest(".people");
+				var existingImage = parentDiv.querySelector("img");
+				if (existingImage) {
+					parentDiv.replaceChild(profileImage, existingImage);
+				} else {
+					parentDiv.insertBefore(profileImage, nameElement.nextSibling);
+				}
+			});
+		}
+
+		// Call the function to create profile images when the DOM is loaded
+		createProfileImages();
 	</script>
 </body>
 

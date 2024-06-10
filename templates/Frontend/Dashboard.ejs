@@ -142,14 +142,14 @@
 									<p>
 										<%= data[i]['serviceAvailable'][j] %>
 									</p>
-								<% } %>
+									<% } %>
 							</td>
 							<td class="active">
 								<% if (data[i]['timings'].get(day).notavailable==false ){%>
 									<p>Active</p>
-								<% }else { %>
+									<% }else { %>
 										<p>Not Active</p>
-								<% } %>
+										<% } %>
 							</td>
 							<td class="role">
 								<% let arr=data[i]['address'].split(' '); 
@@ -161,13 +161,15 @@
 							</td>
 							<td class="edit">
 								<% if (data[i]['timings'].get(day).notavailable==false ){%>
-								<button type="button" id="book_slot" class="btn btn-primary btn-sm book-slot-btn" data-shopname="<%= data[i]['shopname'] %>" data-ownername="<%= data[i]['ownername'] %>" data-address="<%=laststr %>" 
-								data-email = "<%= data[i]['email'] %>" data-customername = "<%=name %>" 
-								data-mobile = "<%= phno %>" 
-								data-custemail = "<%= conmail%>">Book Slot</button>
-								<% }else { %>
-									<button type="button" class="btn btn-primary btn-sm book-slot-btn" style="border-radius: 10px;" disabled>Book Slot</button>
-								<% } %>
+									<button type="button" id="book_slot" class="btn btn-primary btn-sm book-slot-btn"
+										data-shopname="<%= data[i]['shopname'] %>"
+										data-ownername="<%= data[i]['ownername'] %>" data-address="<%=laststr %>"
+										data-email="<%= data[i]['email'] %>" data-customername="<%=name %>"
+										data-mobile="<%= phno %>" data-custemail="<%= conmail%>">Book Slot</button>
+									<% }else { %>
+										<button type="button" class="btn btn-primary btn-sm book-slot-btn"
+											style="border-radius: 10px;" disabled>Book Slot</button>
+										<% } %>
 							</td>
 						</tr>
 						<% } %>
@@ -204,14 +206,14 @@
 									<p>
 										<%= second[i]['vehicletype'][j] %>
 									</p>
-								<% } %>
+									<% } %>
 							</td>
 							<td class="active">
 								<% if (data[i]['timings'].get(day).from !="" ){%>
 									<p>Active</p>
-								<% }else { %>
+									<% }else { %>
 										<p>Not Active</p>
-								<% } %>
+										<% } %>
 							</td>
 							<td class="role">
 								<p>
@@ -223,11 +225,11 @@
 						</td>
 						<td class="edit">
 							<button type="button" class="btn btn-primary btn-sm">
-							<% if (second[i][' isaccepted']==false){%>
+							<% if (second[i]['isaccepted']==false){%>
 										Pending
-							<% } else { %>
+										<% } else { %>
 											Accepted
-							<% } %></button>
+											<% } %></button>
 							</td>
 						</tr>
 						<% } %>
@@ -264,14 +266,14 @@
 									<p>
 										<%= data[i]['serviceAvailable'][j] %>
 									</p>
-								<% } %>
+									<% } %>
 							</td>
 							<td class="active">
 								<% if (third[i].iscompleted==false) {%>
 									<p>Working</p>
-								<% } else { %>
+									<% } else { %>
 										<p>Completed</p>
-								<% } %>
+										<% } %>
 							</td>
 							<td class="role">
 								<p>
@@ -282,16 +284,16 @@
 						</td>
 						<td class="edit">
 								<% if(third[i]['iscompleted']==true){%>
-									<button type="button" id="billbtn" class="btn btn-primary btn-sm"
-									data-registernumber="<%= third[i]['registernumber'] %>"
-									data-bookeddate="<%= third[i]['bookeddate'] %>"
-									data-customername="<%= third[i]['customername'] %>"
-									data-shopname="<%= third[i]['shopname'] %>">View
-									Bill</button>
-								<% } else {%>
-									<button type="button" id="notgenerate" class="btn btn-primary btn-sm">Not
-										Generated</button>
-								<% } %>
+										<button type="button" id="billbtn" class="btn btn-primary btn-sm"
+											data-registernumber="<%= third[i]['registernumber'] %>"
+											data-bookeddate="<%= third[i]['bookeddate'] %>"
+											data-customername="<%= third[i]['customername'] %>"
+											data-shopname="<%= third[i]['shopname'] %>">View
+											Bill</button>
+										<% } else {%>
+											<button type="button" id="notgenerate" class="btn btn-primary btn-sm">Not
+												Generated</button>
+											<% } %>
 												</button>
 							</td>
 						</tr>
@@ -308,12 +310,12 @@
 
 		var canvas = document.createElement("canvas");
 		var context = canvas.getContext("2d");
-		canvas.width = 100; 
+		canvas.width = 100;
 		canvas.height = 100;
-		context.fillStyle = "#F2AA4CFF"; 
-		context.fillRect(0, 0, canvas.width, canvas.height); 
-		context.fillStyle = "#101820FF"; 
-		context.font = "bold 60px Arial"; 
+		context.fillStyle = "#F2AA4CFF";
+		context.fillRect(0, 0, canvas.width, canvas.height);
+		context.fillStyle = "#101820FF";
+		context.font = "bold 60px Arial";
 		context.textAlign = "center";
 		context.textBaseline = "middle";
 		context.fillText(firstCharacter, canvas.width / 2, canvas.height / 2);
@@ -422,7 +424,69 @@
 			});
 		});
 
+		function createProfileImages() {
+			var customerNames = document.querySelectorAll(".people-description h5");
+			customerNames.forEach(function (nameElement) {
+				var name = nameElement.textContent.trim();
+				var firstCharacter = name.charAt(0).toUpperCase();
 
+				var canvas = document.createElement("canvas");
+				var context = canvas.getContext("2d");
+				canvas.width = 100;
+				canvas.height = 100;
+				context.fillStyle = "#F2AA4CFF";
+				context.fillRect(0, 0, canvas.width, canvas.height);
+				context.fillStyle = "#101820FF";
+				context.font = "bold 60px Arial";
+				context.textAlign = "center";
+				context.textBaseline = "middle";
+				context.fillText(firstCharacter, canvas.width / 2, canvas.height / 2);
+
+				var dataURL = canvas.toDataURL();
+				var profileImage = document.createElement("img");
+				profileImage.src = dataURL;
+
+				var parentDiv = nameElement.closest(".people");
+				var existingImage = parentDiv.querySelector("img");
+				if (existingImage) {
+					parentDiv.replaceChild(profileImage, existingImage);
+				} else {
+					parentDiv.insertBefore(profileImage, nameElement.nextSibling);
+				}
+			});
+		}
+
+		// Call the function to create profile images when the DOM is loaded
+		createProfileImages();
+
+		var profileImage = document.getElementById("profileImage");
+			var popupBox = document.getElementById("popupBox");
+
+			// Function to show the popup box
+			function showPopup(event) {
+				event.preventDefault();
+				// Display the popup box at the position of the clicked image
+				popupBox.style.display = "block";
+				popupBox.style.right = "10px";
+				popupBox.style.top = "50px";
+			}
+			// Event listener to show the popup box when the image is clicked
+			profileImage.addEventListener("click", showPopup);
+
+			// Event listener to hide the popup box when clicking outside of it
+			document.addEventListener("click", function (event) {
+				if (event.target !== profileImage && event.target !== popupBox) {
+					hidePopup();
+				}
+			});
+
+			// Event listener for logout option in the popup box
+			var logoutLink = document.getElementById("logoutLink");
+			logoutLink.addEventListener("click", function (event) {
+				event.preventDefault();
+				// Perform logout action here, for example redirecting to logout page
+				window.location.href = "/";
+			});
 
 	</script>
 </body>
