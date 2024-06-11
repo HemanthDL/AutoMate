@@ -45,6 +45,7 @@ router.post('/storebill', async (req, res) => {
                 conmail: consumer.email,
                 mechanicnumber: consumer.mobile,
                 arr: arr,
+                complaint:null
             });
             return;
         }
@@ -86,6 +87,7 @@ router.post('/storebill', async (req, res) => {
             conmail: consumer.email,
             mechanicnumber: consumer.mobile,
             arr: arr,
+            complaint:null
         });
     } catch (err) {
         console.error('Error in booking', err);
@@ -112,6 +114,7 @@ router.post('/storebill', async (req, res) => {
             conmail: consumer.email,
             mechanicnumber: consumer.mobile,
             arr: arr,
+            complaint:null
         });
     }
 });

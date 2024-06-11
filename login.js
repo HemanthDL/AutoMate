@@ -8,6 +8,7 @@ const loginmech = require("./routes/loginmech")
 const shopadd = require("./routes/shopadd")
 const booking = require('./routes/slotbooking')
 const bill = require('./routes/billbymech')
+
 // const collection = require('./models/consumer')
 
 

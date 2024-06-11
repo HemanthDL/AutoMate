@@ -3,11 +3,31 @@ const router = express.Router()
 const collection = require('../models/mechanic')
 const book = require('../models/bookslot')
 const bodyparser = require('body-parser')
-const view_desc = require('./view_desc')
+const bill = require('../models/bill')
+const mechanic = require('../models/mechanic')
 
 router.use(bodyparser.json());
 
 
+router.post('/get-complaint', async (req, res) => {
+    const { customeremail } = req.body;
+    const { mechanicemail } = req.body;
+    const { registernumber } = req.body;
+    console.log(customeremail+" m "+mechanicemail+" r "+registernumber);
+
+    try {
+        let a = await book.findOne({customeremail:customeremail,mechanicemail:mechanicemail,registernumber:registernumber});
+        console.log("complaint : "+a);
+        // if(!a){
+        //     res.json({success:false,complaint:null});
+        // }
+        const complaint = a.complaint;
+        res.json({ success: true,complaint});
+    } catch (error) {
+        console.error('Error fetching complaint:', error);
+        res.json({ success: false });
+    }
+});
 
 router.post('/update-customer',async(req,res)=>{
     const {customerId} = req.body;
@@ -21,6 +41,25 @@ router.post('/update-customer',async(req,res)=>{
         
     } catch (error) {
         console.log("error in updating");
+    }
+
+});
+
+router.post('/bill-paid',async(req,res)=>{
+    const {customerId} = req.body;
+    const {mechanicId} = req.body;
+    const {registernumber} = req.body;
+    console.log(customerId+" "+mechanicId+" "+registernumber);
+
+    try {
+        await book.findOneAndDelete({mechanicemail:mechanicId,customeremail:customerId,registernumber:registernumber});
+        await bill.findOneAndDelete({registernumber:registernumber});
+        res.status(200).send({ success: true });
+        console.log("Succesfully deleted accept button");
+        
+    } catch (error) {
+        console.log("error in deleting");
+        res.status(404).send({success:false});
     }
 
 });
@@ -40,9 +79,9 @@ router.post('/iscomplete-customer',async(req,res)=>{
 })
 
 
-// router.get('/loginmech',(req,res)=>{
-//     res.render('Frontend/Dashboard');
-// })
+router.get('/loginmech',(req,res)=>{
+    res.render('Frontend/mechanic_dashboard');
+})
 
 router.post('/loginmech', async (req, res) => {
     try {
@@ -82,6 +121,7 @@ router.post('/loginmech', async (req, res) => {
                 conmail:consumer.email, 
                 mechanicnumber:consumer.mobile,
                 arr:arr,
+                complaint:null
             });
             // res.send("<script>alert('Login successful'); window.location.href = '/';</script>");
             return;
