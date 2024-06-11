@@ -182,7 +182,7 @@
 					<tr>
 						<td>Shop Name</td>
 						<td>Service Booked</td>
-						<td>Status</td>
+						<td>Booked Date</td>
 						<td>Address</td>
 						<td>Form Status</td>
 					</tr>
@@ -207,13 +207,10 @@
 										<%= second[i]['vehicletype'][j] %>
 									</p>
 									<% } %>
+									<p><%= second[i]['registernumber'] %></p>
 							</td>
 							<td class="active">
-								<% if (data[i]['timings'].get(day).from !="" ){%>
-									<p>Active</p>
-									<% }else { %>
-										<p>Not Active</p>
-										<% } %>
+								<h6><%= second[i]['bookeddate'] %></h6>
 							</td>
 							<td class="role">
 								<p>
@@ -241,7 +238,7 @@
 				<thead>
 					<tr>
 						<td>Shop Name</td>
-						<td>Service Available</td>
+						<td>Service Booked</td>
 						<td>Service Status</td>
 						<td>Address</td>
 						<td>Bill Status</td>
@@ -254,19 +251,18 @@
 								<img src="" alt="" />
 								<div class="people-description">
 									<h5>
-										<%= data[i]['shopname'] %>
+										<%= third[i]['shopname'] %>
 									</h5>
 									<p>
-										<%= data[i]['ownername'] %>
+										<%= third[i]['ownername'] %>
 									</p>
 								</div>
 							</td>
 							<td class="people-des">
-								<% for (let j=0; j < data[i]['serviceAvailable'].length; j++) {%>
 									<p>
-										<%= data[i]['serviceAvailable'][j] %>
+										<%= third[i]['vehicletype'][0] %>
 									</p>
-									<% } %>
+									<p><%= third[i]['registernumber'] %></p>
 							</td>
 							<td class="active">
 								<% if (third[i].iscompleted==false) {%>

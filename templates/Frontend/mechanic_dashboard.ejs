@@ -369,7 +369,7 @@
 									data-registernumber="<%= third[i]['registernumber'] %>"
 									data-vehicletype="<%= third[i]['vehicletype'][0] %>"
 									data-bookeddate="<%= third[i]['bookeddate'] %>"
-									data-mechanicnumber="<%= mechanicnumber %>" data-complaint="<%= third[i]['complaint'] %>">
+									data-mechanicnumber="<%= mechanicnumber %>" data-complaint="<%= third[i]['complaint'] %>" data-shopname="<%= third[i]['shopname'] %>">
 									Generate Bill
 								</button>
 								<button type="button" id="paid_btn" class="btn btn-success btn-sm book-slot-btn" data-registernumber="<%= third[i]['registernumber'] %>" data-customeremail="<%= third[i]['customeremail'] %>" data-mechanicemail="<%= third[i]['mechanicemail'] %>"><i class="fa-solid fa-indian-rupee-sign"></i> PAID</button>
@@ -553,6 +553,7 @@
 
 		generate_bill.forEach(button => {
 			button.addEventListener('click', async (event) => {
+
 				const customerId = event.target.getAttribute('data-customername');
 				const registernumber = event.target.getAttribute('data-registernumber');
 				const customernumber = event.target.getAttribute('data-customernumber');
@@ -560,9 +561,10 @@
 				const bookeddate = event.target.getAttribute('data-bookeddate');
 				const mechanicnumber = event.target.getAttribute('data-mechanicnumber');
 				const complaint = event.target.getAttribute('data-complaint');
+				const shopname = event.target.getAttribute('data-shopname');
 
 				window.location.href =
-					`/generatebill?customerId=${encodeURIComponent(customerId)}&registernumber=${encodeURIComponent(registernumber)}&customernumber=${encodeURIComponent(customernumber)}&vehicletype=${encodeURIComponent(vehicletype)}&bookeddate=${encodeURIComponent(bookeddate)}&mechanicnumber=${encodeURIComponent(mechanicnumber)}&complaint=${encodeURIComponent(complaint)}`;
+					`/generatebill?customerId=${encodeURIComponent(customerId)}&registernumber=${encodeURIComponent(registernumber)}&customernumber=${encodeURIComponent(customernumber)}&vehicletype=${encodeURIComponent(vehicletype)}&bookeddate=${encodeURIComponent(bookeddate)}&mechanicnumber=${encodeURIComponent(mechanicnumber)}&complaint=${encodeURIComponent(complaint)}&shopname=${encodeURIComponent(shopname)}`;
 			});
 		});
 

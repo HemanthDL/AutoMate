@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const collection = require('../models/mechanic');
+const bcrypt = require('bcrypt')
 
 router.post('/signupmech', async (req, res) => {
     const data = {
@@ -9,6 +10,10 @@ router.post('/signupmech', async (req, res) => {
         password: req.body.password,
         mobile: req.body.mob,
     };
+
+    const saltround = await bcrypt.genSalt(10);
+    const hass_password = await bcrypt.hash(data.password,saltround);
+    data.password = hass_password;
 
     await collection.insertMany([data])
         .then(() => {

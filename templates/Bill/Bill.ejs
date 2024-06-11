@@ -113,6 +113,9 @@
 
         <fieldset>
             <legend>Payment Details</legend>
+            <label for="shopname">Mechanic Shop : </label>
+            <input type="email" id="shopname" name="shopname" readonly required><br>
+
             <label for="mechanicphno">Mechanic Number : </label>
             <input type="email" id="mechanicphno" name="mechanicphno" readonly required><br>
 
@@ -155,6 +158,7 @@
         const vehicletype = urlParams.get('vehicletype');
         const bookeddate = urlParams.get('bookeddate');
         const mechanicnumber = urlParams.get('mechanicnumber');
+        const shopname = urlParams.get('shopname');
 
         document.getElementById('customerName').value = customerId;
         document.getElementById('registerNumber').value = registernumber;
@@ -162,6 +166,7 @@
         document.getElementById('vehicletype').value = vehicletype;
         document.getElementById('bookeddate').value = bookeddate;
         document.getElementById('mechanicphno').value = mechanicnumber;
+        document.getElementById('shopname').value = shopname;
     </script>
 </body>
 

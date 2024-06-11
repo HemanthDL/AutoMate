@@ -22,7 +22,7 @@ function validation() {
             flag=1;
             return false;
         }
-        if (!(email.includes('@')) || !(email.includes('.'))) {
+        else if (!(email.includes('@')) || !(email.includes('.'))) {
             alert('Enter a valid email id');
             flag=1;
             return false;
@@ -34,10 +34,13 @@ function validation() {
             flag=1;
             return false;
         }
-        if (isNaN(mobile) || mobile.length > 10 || mobile.length < 10) {
+        else if (isNaN(mobile) || mobile.length > 10 || mobile.length < 10) {
             alert('Enter valid Mobile Number')
             flag=1;
             return false;
+        }
+        if(flag==1){
+            document.location.href = "/";
         }
 
         if(flag==0){

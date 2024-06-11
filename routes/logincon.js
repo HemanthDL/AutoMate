@@ -5,6 +5,7 @@ const book = require('../models/bookslot')
 const shop = require('../models/shop')
 const bill = require('../models/bill')
 const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt')
 
 
 router.use(bodyParser.json());
@@ -37,8 +38,7 @@ router.get('/invoice', async (req, res) => {
     try {
         // Render the invoice page with the bill data
         res.render('Invoice/Invoice', {
-            data: billData,
-            shopname: billData.shopname // Adjust as needed
+            data: billData
         });
     } catch (error) {
         console.error('Error rendering invoice:', error);
@@ -64,8 +64,20 @@ router.post('/logincon', async (req, res) => {
             res.render('loginpage', { errorMessage: errorMessage,signactionvalue:signactionvalue,loginactionvalue:loginactionvalue,asname:name });
             return;
         }
+        let enteredpassword = req.body.loginpassword;
+        let databasepassword = consumer.password;
+        console.log("entered : "+enteredpassword+"\ndatabase : "+databasepassword);
+        const isPasswordValid = await bcrypt.compare(enteredpassword,databasepassword);
+        if (!isPasswordValid){
+            console.log('Invalid password');
+            let errorMessage = 'Invalid Password!';
+            let signactionvalue = "/signupcon"
+            let loginactionvalue = "/logincon"
+            let name = "Customer"
+            res.render('loginpage', { errorMessage: errorMessage,signactionvalue:signactionvalue,loginactionvalue:loginactionvalue,asname:name });
+            return;
+        }
 
-        if (consumer.password === req.body.loginpassword) {
             console.log('Login successful');
             const a = await shop.find()
             let data = Array.from(a)
@@ -74,7 +86,7 @@ router.post('/logincon', async (req, res) => {
             let days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
             let day = days[d]
             console.log("Today is : ",day);
-            console.log(data[0]['timings'].get(day)['from']);
+            // console.log(data[0]['timings'].get(day)['from']);
             let arr = ['Shop List','Pending','Bill'];
 
             //for board 2
@@ -98,15 +110,6 @@ router.post('/logincon', async (req, res) => {
             });
             // res.send("<script>alert('Login successful'); window.location.href = '/';</script>");
             return;
-        } else {
-            console.log('Invalid password');
-            let errorMessage = 'Invalid Password!';
-            let signactionvalue = "/signupcon"
-            let loginactionvalue = "/logincon"
-            let name = "Customer"
-            res.render('loginpage', { errorMessage: errorMessage,signactionvalue:signactionvalue,loginactionvalue:loginactionvalue,asname:name });
-            return;
-        }
     } catch (error) {
         console.log('Error:', error);
         let errorMessage = 'Error Occurred';

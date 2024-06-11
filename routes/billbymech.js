@@ -59,6 +59,7 @@ router.post('/storebill', async (req, res) => {
             itemdesc: req.body.description ,
             mechanicnumber: req.body.mechanicphno,
             totalamount: req.body.totalDue,
+            shopname:req.body.shopname
         });
 
         await billing.save();
