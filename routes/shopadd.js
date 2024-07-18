@@ -18,13 +18,13 @@ router.post('/mechreg', async (req, res) => {
             serviceAvailable: req.body.bike && req.body.car ? ['Bike', 'Car'] : (req.body.bike ? ['Bike'] : (req.body.car ? ['Car'] : [])),
             address: req.body.addr,
             timings: {
-                Monday: { from: req.body.Mondayf, to: req.body.Mondayt, notavailable: req.body.notavailable === 'Monday' },
-                Tuesday: { from: req.body.Tuesdayf, to: req.body.Tuesdayt, notavailable: req.body.notavailable === 'Tuesday' },
-                Wednesday: { from: req.body.Wednesdayf, to: req.body.Wednesdayt, notavailable: req.body.notavailable === 'Wednesday' },
-                Thursday: { from: req.body.Thursdayf, to: req.body.Thursdayt, notavailable: req.body.notavailable === 'Thrusday' },
-                Friday: { from: req.body.Fridayf, to: req.body.Fridayt, notavailable: req.body.notavailable === 'Friday' },
-                Saturday: { from: req.body.Saturdayf, to: req.body.Saturdayt, notavailable: req.body.notavailable === 'Saturday' },
-                Sunday: { from: req.body.Sundayf, to: req.body.Sundayt, notavailable: req.body.notavailable === 'Sunday' }
+                Monday: { from: req.body.Mondayf, to: req.body.Mondayt, notavailable: req.body.notavailableMonday === 'Monday' },
+                Tuesday: { from: req.body.Tuesdayf, to: req.body.Tuesdayt, notavailable: req.body.notavailableTuesday === 'Tuesday' },
+                Wednesday: { from: req.body.Wednesdayf, to: req.body.Wednesdayt, notavailable: req.body.notavailableWednesday === 'Wednesday' },
+                Thursday: { from: req.body.Thursdayf, to: req.body.Thursdayt, notavailable: req.body.notavailableThrusday === 'Thrusday' },
+                Friday: { from: req.body.Fridayf, to: req.body.Fridayt, notavailable: req.body.notavailableFriday === 'Friday' },
+                Saturday: { from: req.body.Saturdayf, to: req.body.Saturdayt, notavailable: req.body.notavailableSaturday === 'Saturday' },
+                Sunday: { from: req.body.Sundayf, to: req.body.Sundayt, notavailable: req.body.notavailableSunday === 'Sunday' }
             },
             phnum: req.body.phnum
         });
