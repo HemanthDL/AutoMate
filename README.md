@@ -11,8 +11,10 @@
 
 ## About Project : 
 
-- Createdauser‑friendlyapplicationtosimplifyvehicleserviceschedulingandcomplaintmanagement,improvingefficiencyanduserexperience.
+- Created a user‑friendly application to simplify vehicle service scheduling and complaint management,improving efficiency and user experience.
 
-- Customerscanbookserviceslots for available dates and view the bill after service completion.
+- Customers can book service slots for available dates and view the bill after service completion.
 
-- Mechanicscanacceptrequests andmarkthemascompleteduponfinishingtheservice.
+- Mechanics can accept requests and mark them as completed upon finishing the service.
+
+- Mechanic can generate a Invoice which can be viewed by the Customer
