@@ -1,13 +1,10 @@
 const express = require('express');
-const loginrouter = require('./routes/logincon');
+const bodyParser = require('body-parser');
 const path = require('path');
 const conn = require('./connection')
-const signuprouter = require("./routes/signupcon")
-const signupmech = require("./routes/signupmech")
-const loginmech = require("./routes/loginmech")
-const shopadd = require("./routes/shopadd")
-const booking = require('./routes/slotbooking')
-const bill = require('./routes/billbymech')
+
+const ConsumerRouter = require("./routes/Consumer")
+const MechanicRouter = require("./routes/Mechanic")
 
 // const collection = require('./models/consumer')
 
@@ -17,6 +14,8 @@ const port = 3000;
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'templates'));
+app.use(bodyParser.json());
+app.use(express.json())
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'templates')));
@@ -31,22 +30,18 @@ app.get('/con', (req, res) => {
     let signactionvalue = "/signupcon"
     let loginactionvalue = "/logincon"
     let name = "Customer"
-    res.render('loginpage', { errorMessage: null,signactionvalue:signactionvalue,loginactionvalue:loginactionvalue,asname:name });
+    res.render('Login/loginpage', { errorMessage: null,signactionvalue:signactionvalue,loginactionvalue:loginactionvalue,asname:name });
 });
 app.get('/mech',(req,res)=>{
     let signactionvalue = "/signupmech"
     let loginactionvalue = "/loginmech"
     let name = "Mechanic"
-    res.render('loginpage', { errorMessage: null,signactionvalue:signactionvalue,loginactionvalue:loginactionvalue,asname:name });
+    res.render('Login/loginpage', { errorMessage: null,signactionvalue:signactionvalue,loginactionvalue:loginactionvalue,asname:name });
 })
 
-app.use(loginrouter)
-app.use(signuprouter)
-app.use(signupmech)
-app.use(loginmech)
-app.use(shopadd)
-app.use(booking)
-app.use(bill)
+
+app.use(ConsumerRouter)
+app.use(MechanicRouter)
 
 
 

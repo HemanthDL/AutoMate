@@ -38,7 +38,7 @@ const shopschema = new mon.Schema({
         type: String,
         required: true
     }
-})
+},{timestamps:true})
 
 const mp = mon.model('shop',shopschema)
 

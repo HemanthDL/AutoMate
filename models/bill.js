@@ -47,7 +47,7 @@ const billschema = new mon.Schema({
         type:String,
         required : true
     }
-})
+},{timestamps:true})
 
 const bill = mon.model('bill',billschema);
 

@@ -26,7 +26,7 @@ const mechscheme = new mon.Schema({
             message: props => `${props.value} is not a valid 10-digit mobile number!`
         }
     }
-})
+},{timestamps:true})
 
 
 const mechanic = mon.model('mechanic',mechscheme)

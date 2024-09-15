@@ -65,7 +65,7 @@ const slotschema = new mon.Schema({
         type : Boolean,
         required : true
     }
-});
+},{timestamps:true});
 
 
 // slotschema.index({ customeremail: 1, mechanicemail: 1 }, { unique: true });

@@ -25,7 +25,7 @@ const conschema = new mongoose.Schema({
             message: props => `${props.value} is not a valid 10-digit mobile number!`
         }
     }
-});
+},{timestamps:true});
 
 const Consumer = mongoose.model('Consumer', conschema);
 
